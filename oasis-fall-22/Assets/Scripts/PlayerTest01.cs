@@ -17,7 +17,7 @@ public class PlayerTest01 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        updateBoardPosition();
+        UpdateBoardPosition();
     }
 
     // Update is called once per frame
@@ -26,27 +26,39 @@ public class PlayerTest01 : MonoBehaviour
         if (Input.GetKeyDown("w") && boardY > 0)
         {
             boardY--;
-            updateBoardPosition();
+            UpdateBoardPosition();
         }
-        if (Input.GetKeyDown("s") && boardY < boardHeight-1)
+        if (Input.GetKeyDown("s") && boardY < boardHeight - 1)
         {
             boardY++;
-            updateBoardPosition();
+            UpdateBoardPosition();
         }
         if (Input.GetKeyDown("a") && boardX > 0)
         {
             boardX--;
-            updateBoardPosition();
+            UpdateBoardPosition();
         }
-        if (Input.GetKeyDown("d") && boardX < boardWidth-1)
+        if (Input.GetKeyDown("d") && boardX < boardWidth - 1)
         {
             boardX++;
-            updateBoardPosition();
+            UpdateBoardPosition();
         }
     }
 
-    public void updateBoardPosition()
+    public void UpdateBoardPosition()
     {
         transform.position = new Vector3(boardX * cellSize + boardStart.x, boardStart.y - boardY * cellSize, 0f);
+    }
+
+    public void MovePlayerX(int cx)
+    {
+        boardX = Mathf.Clamp(boardX + cx, 0, boardWidth - 1);
+        UpdateBoardPosition();
+    }
+
+    public void MovePlayerY(int cy)
+    {
+        boardY = Mathf.Clamp(boardY + cy, 0, boardHeight - 1);
+        UpdateBoardPosition();
     }
 }
