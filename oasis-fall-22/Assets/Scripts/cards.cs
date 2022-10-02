@@ -60,3 +60,36 @@ class activeCard : card{
         //what happens when you play a card
     }
 }
+/**
+A Support Card class.
+*/
+class supportCard : card{
+
+    //The stat that is being supported.
+    string statSupported;
+
+    public card(){
+        color = "neutral";
+        cardType = Type.Support;
+        statSupported = "ATK";
+    }
+
+    public card(string color, string stat){
+        if(!(String.Equals(color, "red") && String.Equals(color, "blue") && String.Equals(color, "green") && String.Equals(color, "neutral"))){
+            throw new IllegalArgumentException("Color must be red, blue, green, or neutral.");
+        }
+        if(!(String.Equals(stat, "ATK") && String.Equals(stat, "DEF") && String.Equals(stat, "SPD"))){
+            throw new IllegalArgumentException("Not a stat.");
+        }
+        color = color;
+        cardType = Type.Support;
+        statSupported = stat;
+    }
+
+    /**
+    The method you use when you want to play a card.
+    */
+    public void playCard(playerStats player, playerStats target){
+        //what happens when you play a card
+    }
+}
