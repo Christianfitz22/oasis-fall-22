@@ -43,7 +43,11 @@ class playerStats{
     }
 
     private int useStatBuffs(string stat, int x){
-        //iterate through
+        foreach(s in this.buffs){
+            if(String.Equals(s.statAffected, stat)){
+                x = s.changeStats(x);
+            }
+        }
         return x;
     }
 
@@ -51,8 +55,8 @@ class playerStats{
         return color;
     }
 
-    public boolean isDead(){
-        return isDead;
+    public boolean isAlive(){
+        return isAlive;
     }
 
     public boolean hasDefended(){
@@ -105,7 +109,7 @@ class playerStats{
         }
         hasMoved = false;
         hasDefended = false;
-        if(isDead){
+        if(!isAlive()){
             //call some function here
         }
     }
@@ -124,9 +128,19 @@ class playerStats{
         this.HP = this.HP + change;
         if(this.HP <= 0){
             this.HP = 0;
-            this.isDead = true;
+            this.isAlive = false;
         }
     }
 
-    //add function for when reviving
+    /**
+    Called for when the player needs to be revived.
+    */
+    public void revive(){
+        this.color = "neutral";
+        this.HP = 100; //change later
+        this.hasMoved = false;
+        this.isAlive = true;
+        this.hasDefended = false;
+        this.buffs.Clear();
+    }
 }
