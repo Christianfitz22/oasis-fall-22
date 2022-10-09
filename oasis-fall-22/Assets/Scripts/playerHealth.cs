@@ -1,14 +1,13 @@
 class playerStats{
     sealed int totalHP;
-    private int HP;
     sealed int baseATK;
-    private int ATK;
     sealed int baseDEF;
-    private int DEF;
-    private int SPD;
+    sealed int SPD;
     private string color;
     private boolean hasMoved;
     private boolean isAlive;
+    private boolean hasDefended;
+    private List<statAffects> buffs;
 
     /**
     The constructor for a player's stats.
@@ -23,6 +22,7 @@ class playerStats{
         SPD = 1;
         color = "neutral";
         hasMoved = false;
+        q = new Queue();
     }
 
     public int getCurrentHealth(){
@@ -47,7 +47,7 @@ class playerStats{
 
     public void endRound(){
         hasMoved = false;
-        //reset stats, consider buffs
+        //go through q
     }
 
     public void isDead(){
@@ -61,14 +61,14 @@ class playerStats{
         if(hasMoved){
             throw new IllegalArgumentException("Player has already moved.");
         }
-        DEF = DEF + 2;
+        hasDefended = true;
         hasMoved = true;
     }
 
     /**
-    Generic method to be called if the player makes a move.
+    Called if the player chooses the move option.
     */
-    public void makeMove(){
+    public void moveSpot(){
         if(hasMoved){
             throw new IllegalArgumentException("Player has already moved.");
         }
@@ -76,8 +76,22 @@ class playerStats{
     }
 
     /**
+    Called if the player plays a card.
+    */
+    public void playCard(card card, playerStats target){
+        if(hasMoved){
+            throw new IllegalArgumentException("Player has already moved.");
+        }
+        hasMoved = true;
+        card.playCard(this, target);
+    }
+
+    public void endRound(){
+        hasMoved = false;
+        hasDefneded = false;
+    }
+    /**
     Methods to be implemented:
-    endRound
-    changeStats
+    something about dealing with buffs
     */
 }
