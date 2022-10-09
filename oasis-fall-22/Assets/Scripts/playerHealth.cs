@@ -78,8 +78,6 @@ class playerStats{
     /**
     Methods to be implemented:
     endRound
-    getAttacked
-    getSupported
-    checkIsDead? - maybe
+    changeStats
     */
 }
