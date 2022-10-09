@@ -75,6 +75,10 @@ class playerStats{
         hasMoved = true;
     }
 
+    public List<statAffects> returnList(){
+        return buffs;
+    }
+
     /**
     Called if the player plays a card.
     */
@@ -87,11 +91,17 @@ class playerStats{
     }
 
     public void endRound(){
+        foreach (statAffect a in this.buffs){
+            a.turnPass();
+            if(a.noMoreTurns){
+                this.buffs.Remove(a);
+            }
+        }
         hasMoved = false;
-        hasDefneded = false;
+        hasDefended = false;
     }
-    /**
-    Methods to be implemented:
-    something about dealing with buffs
-    */
+    
+    public void addAffect(statAffects new){
+        this.buffs.Add(new);
+    }
 }
