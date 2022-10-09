@@ -31,18 +31,20 @@ class playerStats{
     }
 
     public int getATK(){
-        //fix
-        return ATK;
+        return useStatBuffs("atk", ATK);
     }
 
     public int getDEF(){
-        //fix
-        return DEF;
+        return useStatBuffs("def", DEF);
     }
 
     public int getMovementSpeed(){
-        //fix
-        return SPD;
+        return useStatBuffs("spd", SPD);
+    }
+
+    private int useStatBuffs(string stat, int x){
+        //iterate through
+        return x;
     }
 
     public string getColor(){
@@ -120,5 +122,11 @@ class playerStats{
     */
     public void changeHealth(int change){
         this.HP = this.HP + change;
+        if(this.HP <= 0){
+            this.HP = 0;
+            this.isDead = true;
+        }
     }
+
+    //add function for when reviving
 }

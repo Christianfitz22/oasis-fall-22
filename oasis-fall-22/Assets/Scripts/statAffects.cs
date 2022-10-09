@@ -1,6 +1,9 @@
 class statAffects{
 
     private int turnsLeft;
+    /**
+    "atk", "def", "spd"
+    */
     private string statAffected;
     private int affectedBy;   
 

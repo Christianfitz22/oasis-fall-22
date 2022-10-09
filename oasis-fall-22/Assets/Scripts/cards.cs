@@ -3,6 +3,7 @@ class card{
     private string color;
     private statAffects whenCardPlayed;
     private boolean isActive;
+    //replace with an array so that you can do ranged attacks
     private boolean isAttack;
 
     /**
@@ -35,6 +36,34 @@ class card{
         return color;
     }
 
+    private int weaponTriangle(string targetColor){
+        if(String.Equals(this.color, "red")){
+            if(String.Equals(targetColor, "green")){
+                return 1.5;
+            }
+            if(String.Equals(targetColor, "blue")){
+                return 0.5;
+            }
+        }
+        if(String.Equals(this.color, "green")){
+            if(String.Equals(targetColor, "blue")){
+                return 1.5;
+            }
+            if(String.Equals(targetColor, "red")){
+                return 0.5;
+            }
+        }
+        if(String.Equals(this.color, "blue")){
+            if(String.Equals(targetColor, "red")){
+                return 1.5;
+            }
+            if(String.Equals(targetColor, "green")){
+                return 0.5;
+            }
+        }
+        return 1;
+    }
+
     /**
     Called when you want to play the card.
     */
@@ -47,7 +76,14 @@ class card{
             target.changeHealth(healed);
         }
         else{
-            //getting attacked
+            //fix so ranged attacks work
+            int atk = player.getATK();
+            int def = target.getDEF();
+            int damage = def - atk;
+            damage = damage * this.weaponTriangle(target.getColor());
+            if(def < atk){
+                target.changeHealth(damage);
+            }
         }
     }
 }
