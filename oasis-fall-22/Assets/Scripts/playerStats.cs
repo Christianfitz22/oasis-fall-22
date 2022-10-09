@@ -1,7 +1,8 @@
 class playerStats{
     sealed int totalHP;
-    sealed int baseATK;
-    sealed int baseDEF;
+    private int HP;
+    sealed int ATK;
+    sealed int DEF;
     sealed int SPD;
     private string color;
     private boolean hasMoved;
@@ -30,14 +31,17 @@ class playerStats{
     }
 
     public int getATK(){
+        //fix
         return ATK;
     }
 
     public int getDEF(){
+        //fix
         return DEF;
     }
 
     public int getMovementSpeed(){
+        //fix
         return SPD;
     }
 
@@ -45,13 +49,12 @@ class playerStats{
         return color;
     }
 
-    public void endRound(){
-        hasMoved = false;
-        //go through q
+    public boolean isDead(){
+        return isDead;
     }
 
-    public void isDead(){
-        return isDead;
+    public boolean hasDefended(){
+        return hasDefended;
     }
 
     /**
@@ -86,6 +89,7 @@ class playerStats{
         if(hasMoved){
             throw new IllegalArgumentException("Player has already moved.");
         }
+        this.color = card.getColor();
         hasMoved = true;
         card.playCard(this, target);
     }
@@ -99,9 +103,22 @@ class playerStats{
         }
         hasMoved = false;
         hasDefended = false;
+        if(isDead){
+            //call some function here
+        }
     }
     
+    /**
+    Called when a player gets buffed or debuffed.
+    */
     public void addAffect(statAffects new){
         this.buffs.Add(new);
+    }
+
+    /**
+    Called when the player is attacked or healed
+    */
+    public void changeHealth(int change){
+        this.HP = this.HP + change;
     }
 }
