@@ -14,15 +14,28 @@ public class PlayerTest01 : MonoBehaviour
     [SerializeField]
     private int boardY = 0;
 
+    private int deltaX = 0;
+    private int deltaY = 0;
+
+    private bool takenTurn = false;
+
+    private GameObject resetButton;
+    private MoveButtonManager moveButtonManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        resetButton = GameObject.Find("ResetButton");
+        resetButton.SetActive(false);
+        moveButtonManager = GameObject.Find("MovementButtons").GetComponent<MoveButtonManager>();
+
         UpdateBoardPosition();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //debug movement
         if (Input.GetKeyDown("w") && boardY > 0)
         {
             boardY--;
@@ -45,20 +58,61 @@ public class PlayerTest01 : MonoBehaviour
         }
     }
 
+    // should always be called at the end of each round
+    public void ExecuteTurn()
+    {
+        UpdateBoardPosition();
+        ResetTurn();
+    }
+
     public void UpdateBoardPosition()
     {
+        MovePlayer();
         transform.position = new Vector3(boardX * cellSize + boardStart.x, boardStart.y - boardY * cellSize, 0f);
+    }
+
+    // should be called whenever we need to reset a player's turn before the end of the round
+    public void ResetTurn()
+    {
+        deltaX = 0;
+        deltaY = 0;
+        resetButton.SetActive(false);
+        takenTurn = false;
+        moveButtonManager.directionPressed();
+    }
+
+    // shoud be called whenever the player has finished setting their turn
+    public void SetTurn()
+    {
+        resetButton.SetActive(true);
+        takenTurn = true;
     }
 
     public void MovePlayerX(int cx)
     {
-        boardX = Mathf.Clamp(boardX + cx, 0, boardWidth - 1);
-        UpdateBoardPosition();
+        deltaX = cx;
+        SetTurn();
+        //UpdateBoardPosition();
     }
 
     public void MovePlayerY(int cy)
     {
-        boardY = Mathf.Clamp(boardY + cy, 0, boardHeight - 1);
-        UpdateBoardPosition();
+        deltaY = cy;
+        SetTurn();
+        //UpdateBoardPosition();
+    }
+
+    // called to actually move the player on the board
+    public void MovePlayer()
+    {
+        boardX = Mathf.Clamp(boardX + deltaX, 0, boardWidth - 1);
+        boardY = Mathf.Clamp(boardY + deltaY, 0, boardHeight - 1);
+        deltaX = 0;
+        deltaY = 0;
+    }
+
+    public bool TurnTaken()
+    {
+        return takenTurn;
     }
 }

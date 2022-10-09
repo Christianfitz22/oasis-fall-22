@@ -6,6 +6,7 @@ public class MoveButtonManager : MonoBehaviour
 {
     private GameObject moveButton;
     private GameObject directionButtons;
+    private PlayerTest01 player;
 
     // Start is called before the first frame update
     void Start()
@@ -13,17 +14,24 @@ public class MoveButtonManager : MonoBehaviour
         moveButton = transform.Find("MoveButton").gameObject;
         directionButtons = transform.Find("DirectionButtons").gameObject;
         directionButtons.SetActive(false);
+        player = GameObject.Find("Player").GetComponent<PlayerTest01>();
     }
 
     public void movePressed()
     {
-        moveButton.SetActive(false);
-        directionButtons.SetActive(true);
+        if (!player.TurnTaken())
+        {
+            moveButton.SetActive(false);
+            directionButtons.SetActive(true);
+        }
     }
 
     public void directionPressed()
     {
-        directionButtons.SetActive(false);
-        moveButton.SetActive(true);
+        if (!player.TurnTaken())
+        {
+            directionButtons.SetActive(false);
+            moveButton.SetActive(true);
+        }
     }
 }
