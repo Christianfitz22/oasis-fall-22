@@ -3,31 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 class playerStats{
-    sealed int totalHP;
+    private int totalHP;
     private int HP;
-    sealed int ATK;
-    sealed int DEF;
-    sealed int SPD;
+    private int ATK;
+    private int DEF;
+    private int SPD;
     private string color;
     private bool hasMoved;
-    private boolean isAlive;
-    private boolean hasDefended;
+    private bool isAlive;
+    private bool hasDefended;
     private List<statAffects> buffs;
 
     /**
     The constructor for a player's stats.
     */
-    public playerStats(){
+    public playerStats() {
         totalHP = 100;
         HP = 100;
-        baseATK = 10;
         ATK = 10;
-        baseDEF = 10;
         DEF = 10;
         SPD = 1;
         color = "neutral";
         hasMoved = false;
-        q = new Queue();
+        isAlive = true;
+        hasDefended = false;
+        buffs = new List<statAffects>();
+    }
+
+    public int getTotalHP()
+    {
+        return totalHP;
     }
 
     public int getCurrentHealth(){
@@ -47,8 +52,9 @@ class playerStats{
     }
 
     private int useStatBuffs(string stat, int x){
-        foreach(s in this.buffs){
-            if(String.Equals(s.statAffected, stat)){
+        foreach (statAffects s in buffs){
+            if (stat.Equals(s.getStatAffected()))
+            {
                 x = s.changeStats(x);
             }
         }
@@ -59,11 +65,11 @@ class playerStats{
         return color;
     }
 
-    public boolean isAlive(){
+    public bool getIsAlive(){
         return isAlive;
     }
 
-    public boolean hasDefended(){
+    public bool getHasDefended(){
         return hasDefended;
     }
 
@@ -71,21 +77,31 @@ class playerStats{
     Called if the player chooses the defend option.
     */
     public void defend(){
-        if(hasMoved){
-            throw new IllegalArgumentException("Player has already moved.");
+        if (hasMoved)
+        {
+            // throw new IllegalArgumentException("Player has already moved.");
+            Debug.Log("Player has already moved.");
         }
-        hasDefended = true;
-        hasMoved = true;
+        else
+        {
+            hasDefended = true;
+            hasMoved = true;
+        }
     }
 
     /**
     Called if the player chooses the move option.
     */
     public void moveSpot(){
-        if(hasMoved){
-            throw new IllegalArgumentException("Player has already moved.");
+        if (hasMoved)
+        {
+            // throw new IllegalArgumentException("Player has already moved.");
+            Debug.Log("Player has already moved");
         }
-        hasMoved = true;
+        else
+        {
+            hasMoved = true;
+        }
     }
 
     public List<statAffects> returnList(){
@@ -96,24 +112,30 @@ class playerStats{
     Called if the player plays a card.
     */
     public void playCard(card card, playerStats target){
-        if(hasMoved){
-            throw new IllegalArgumentException("Player has already moved.");
+        if (hasMoved)
+        {
+            // throw new IllegalArgumentException("Player has already moved.");
+            Debug.Log("Player has already moved.");
         }
-        this.color = card.getColor();
-        hasMoved = true;
-        card.playCard(this, target);
+        else
+        {
+            this.color = card.getColor();
+            hasMoved = true;
+            card.playCard(this, target);
+        }
     }
 
     public void endRound(){
-        foreach (statAffect a in this.buffs){
+        foreach (statAffects a in this.buffs){
             a.turnPass();
-            if(a.noMoreTurns){
+            if(a.noMoreTurns())
+            {
                 this.buffs.Remove(a);
             }
         }
         hasMoved = false;
         hasDefended = false;
-        if(!isAlive()){
+        if(!getIsAlive()){
             //call some function here
         }
     }
@@ -121,8 +143,8 @@ class playerStats{
     /**
     Called when a player gets buffed or debuffed.
     */
-    public void addAffect(statAffects new){
-        this.buffs.Add(new);
+    public void addAffect(statAffects newAffect){
+        this.buffs.Add(newAffect);
     }
 
     /**
