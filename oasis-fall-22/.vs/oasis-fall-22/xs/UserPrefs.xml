@@ -1,10 +1,12 @@
 ﻿<Properties StartupConfiguration="{FFA0C246-99C3-F0CB-0F3D-D4AA6D005A39}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/RedoButtonController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/playerStats.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerTest01.cs" Line="70" Column="27" />
-      <File FileName="Assets/Scripts/MoveButtonManager.cs" Line="36" Column="6" />
-      <File FileName="Assets/Scripts/TimerController.cs" Line="9" Column="37" />
-      <File FileName="Assets/Scripts/RedoButtonController.cs" Line="7" Column="17" />
+      <File FileName="Assets/Scripts/PlayerTest01.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MoveButtonManager.cs" Line="16" Column="43" />
+      <File FileName="Assets/Scripts/TimerController.cs" Line="23" Column="73" />
+      <File FileName="Assets/Scripts/RedoButtonController.cs" Line="11" Column="73" />
+      <File FileName="Assets/Scripts/playerStats.cs" Line="16" Column="1" />
+      <File FileName="Assets/Scripts/statAffects.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,7 +14,7 @@
           <Node name="oasis-fall-22" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="RedoButtonController.cs" selected="True" />
+                <Node name="playerStats.cs" selected="True" />
               </Node>
             </Node>
           </Node>

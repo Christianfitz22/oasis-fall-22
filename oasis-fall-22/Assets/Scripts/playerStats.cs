@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 class playerStats{
     sealed int totalHP;
     private int HP;
@@ -5,7 +9,7 @@ class playerStats{
     sealed int DEF;
     sealed int SPD;
     private string color;
-    private boolean hasMoved;
+    private bool hasMoved;
     private boolean isAlive;
     private boolean hasDefended;
     private List<statAffects> buffs;
