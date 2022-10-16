@@ -27,6 +27,12 @@ class playerStats{
         hasMoved = false;
         isAlive = true;
         hasDefended = false;
+        buffs = new List<statAffects>();
+    }
+
+    public int getTotalHP()
+    {
+        return totalHP;
     }
 
     public int getCurrentHealth(){

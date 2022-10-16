@@ -9,9 +9,9 @@ class statAffects{
     "atk", "def", "spd"
     */
     private string statAffected;
-    private int affectedBy;   
+    private float affectedBy;   
 
-    public statAffects(int t, string s, int num){
+    public statAffects(int t, string s, float num){
         if(t < 0){
             //throw new IllegalArgumentException("what the fuck");
         }
@@ -49,6 +49,6 @@ class statAffects{
     }
 
     public int changeStats(int originalStat){
-        return originalStat * affectedBy;
+        return (int) (originalStat * affectedBy);
     }
 }

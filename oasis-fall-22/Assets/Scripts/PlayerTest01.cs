@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerTest01 : MonoBehaviour
 {
-    static int boardHeight = 10;
-    static int boardWidth = 8;
-    static float cellSize = 1f;
-    static Vector2 boardStart = new Vector2(-3.5f, 4.5f);
+    private int boardHeight = Board.boardHeight;
+    private int boardWidth = Board.boardWidth;
+    private float cellSize = Board.cellSize;
+    private Vector2 boardStart = Board.boardStart;
 
     [SerializeField]
     private int boardX = 0;
@@ -21,6 +22,8 @@ public class PlayerTest01 : MonoBehaviour
 
     private GameObject resetButton;
     private MoveButtonManager moveButtonManager;
+    private playerStats currentStats;
+    private TMP_Text statValues;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +31,9 @@ public class PlayerTest01 : MonoBehaviour
         resetButton = GameObject.Find("ResetButton");
         resetButton.SetActive(false);
         moveButtonManager = GameObject.Find("MovementButtons").GetComponent<MoveButtonManager>();
+
+        currentStats = new playerStats();
+        statValues = GameObject.Find("StatValues").GetComponent<TMP_Text>();
 
         UpdateBoardPosition();
     }
@@ -62,6 +68,7 @@ public class PlayerTest01 : MonoBehaviour
     public void ExecuteTurn()
     {
         UpdateBoardPosition();
+        UpdateStatValues();
         ResetTurn();
     }
 
@@ -69,6 +76,11 @@ public class PlayerTest01 : MonoBehaviour
     {
         MovePlayer();
         transform.position = new Vector3(boardX * cellSize + boardStart.x, boardStart.y - boardY * cellSize, 0f);
+    }
+
+    public void UpdateStatValues()
+    {
+        statValues.SetText(currentStats.getCurrentHealth() + " / 100\n" + currentStats.getATK() + "\n" + currentStats.getDEF() + "\n" + currentStats.getMovementSpeed());
     }
 
     // should be called whenever we need to reset a player's turn before the end of the round
@@ -81,7 +93,7 @@ public class PlayerTest01 : MonoBehaviour
         moveButtonManager.directionPressed();
     }
 
-    // shoud be called whenever the player has finished setting their turn
+    // should be called whenever the player has finished setting their turn
     public void SetTurn()
     {
         resetButton.SetActive(true);

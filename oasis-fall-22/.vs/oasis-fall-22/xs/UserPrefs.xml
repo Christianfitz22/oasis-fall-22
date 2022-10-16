@@ -1,13 +1,14 @@
 ﻿<Properties StartupConfiguration="{FFA0C246-99C3-F0CB-0F3D-D4AA6D005A39}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/cards.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyController.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerTest01.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerTest01.cs" Line="77" Column="22" />
+      <File FileName="Assets/Scripts/EnemyController.cs" Line="28" Column="6" />
       <File FileName="Assets/Scripts/MoveButtonManager.cs" />
       <File FileName="Assets/Scripts/TimerController.cs" />
-      <File FileName="Assets/Scripts/RedoButtonController.cs" />
-      <File FileName="Assets/Scripts/playerStats.cs" Line="131" Column="29" />
-      <File FileName="Assets/Scripts/statAffects.cs" Line="51" Column="46" />
-      <File FileName="Assets/Scripts/cards.cs" Line="3" Column="1" />
+      <File FileName="Assets/Scripts/RedoButtonController.cs" Line="11" Column="73" />
+      <File FileName="Assets/Scripts/playerStats.cs" Line="124" Column="41" />
+      <File FileName="Assets/Scripts/cards.cs" Line="100" Column="14" />
+      <File FileName="Assets/Scripts/Board.cs" Line="10" Column="65" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,7 +16,7 @@
           <Node name="oasis-fall-22" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="cards.cs" selected="True" />
+                <Node name="EnemyController.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -25,7 +26,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="6c35778b-1789-47b4-b489-e23c145a3741" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="59efeb98-1626-46a3-bbd7-500a4a53bf3d" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -397,3 +397,30 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 449.251719 seconds.
+  path: Assets/Sprites/Down-Selected.png
+  artifactKey: Guid(75f90c129d5fd4635844e44615424569) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Down-Selected.png using Guid(75f90c129d5fd4635844e44615424569) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dea6894d2f677b38db06a21197e96048') in 1.572221 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000102 seconds.
+  path: Assets/Sprites/Left.png
+  artifactKey: Guid(d1dac22d48903403aa258f6ba609da92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Left.png using Guid(d1dac22d48903403aa258f6ba609da92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '765179063b516142aee6179b19177003') in 0.039821 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000080 seconds.
+  path: Assets/Sprites/Right.png
+  artifactKey: Guid(54e577b4c8c2a4369af8c6e2276f1afb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Right.png using Guid(54e577b4c8c2a4369af8c6e2276f1afb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70a4efd811ba9b4e242fbc65313379b3') in 0.029992 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000102 seconds.
+  path: Assets/Sprites/Up.png
+  artifactKey: Guid(27c07c37cde79496297585b3d9e90fcc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Up.png using Guid(27c07c37cde79496297585b3d9e90fcc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7be2bbee13b97a10ca252825b2339aab') in 0.034838 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
