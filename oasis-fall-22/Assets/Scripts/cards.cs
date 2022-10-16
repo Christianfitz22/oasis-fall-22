@@ -1,64 +1,78 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
 class card{
     
     private string color;
     private statAffects whenCardPlayed;
-    private boolean isActive;
+    private bool isActive;
     //replace with an array so that you can do ranged attacks
-    private boolean isAttack;
+    private bool isAttack;
 
     /**
     Constructor for a support card.
     */
     public card(string c, statAffects s){
-        if(c == null || s == null){
-            throw new IllegalArgumentException("Cannot be null");
+        if (c == null || s == null)
+        {
+            //throw new IllegalArgumentException("Cannot be null");
         }
-        if(!(String.Equals(c, "red") && String.Equals(c, "blue") && String.Equals(c, "green") && String.Equals(c, "neutral"))){
-            throw new IllegalArgumentException("Color must be red, blue, green, or neutral.");
+        else if (!(c.Equals("red") && c.Equals("blue") && c.Equals("green") && c.Equals("neutral")))
+        {
+            // throw new IllegalArgumentException("Color must be red, blue, green, or neutral.");
         }
-        color = c;
-        whenCardPlayed = s;
-        isActive = false;
+        else
+        {
+            color = c;
+            whenCardPlayed = s;
+            isActive = false;
+        }
     }
     /**
     Constructor for an active card.
     */
-    public card(string c, boolean isATK){
-        if(c == null || isATK == null){
-            throw new IllegalArgumentException("Cannot be null");
+    public card(string c, bool isATK){
+        if (c == null || isATK == null)
+        {
+            //throw new IllegalArgumentException("Cannot be null");
         }
-        color = c;
-        isActive = true;
-        isAttack = isATK;
+        else
+        {
+            color = c;
+            isActive = true;
+            isAttack = isATK;
+        }
     }
 
     public string getColor(){
         return color;
     }
 
-    private int weaponTriangle(string targetColor){
+    private float weaponTriangle(string targetColor){
         if(String.Equals(this.color, "red")){
             if(String.Equals(targetColor, "green")){
-                return 1.5;
+                return 1.5f;
             }
             if(String.Equals(targetColor, "blue")){
-                return 0.5;
+                return 0.5f;
             }
         }
         if(String.Equals(this.color, "green")){
             if(String.Equals(targetColor, "blue")){
-                return 1.5;
+                return 1.5f;
             }
             if(String.Equals(targetColor, "red")){
-                return 0.5;
+                return 0.5f;
             }
         }
         if(String.Equals(this.color, "blue")){
             if(String.Equals(targetColor, "red")){
-                return 1.5;
+                return 1.5f;
             }
             if(String.Equals(targetColor, "green")){
-                return 0.5;
+                return 0.5f;
             }
         }
         return 1;
@@ -69,7 +83,7 @@ class card{
     */
     public void playCard(playerStats player, playerStats target){
         if(!isActive){
-            target.addAffect(statAffects);
+            target.addAffect(whenCardPlayed);
         }
         else if(!isAttack){
             int healed = player.getATK();
@@ -80,7 +94,7 @@ class card{
             int atk = player.getATK();
             int def = target.getDEF();
             int damage = def - atk;
-            damage = damage * this.weaponTriangle(target.getColor());
+            damage = (int) (damage * this.weaponTriangle(target.getColor()));
             if(def < atk){
                 target.changeHealth(damage);
             }

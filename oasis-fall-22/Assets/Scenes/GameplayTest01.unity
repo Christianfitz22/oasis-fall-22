@@ -3177,8 +3177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c615e388e7bd4069a2eb11798010df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardX: 0
-  boardY: 0
+  boardX: 3
+  boardY: 3
 --- !u!1 &1823228966
 GameObject:
   m_ObjectHideFlags: 0
