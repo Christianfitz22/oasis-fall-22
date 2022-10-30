@@ -187,7 +187,10 @@ public class PlayerTest01 : MonoBehaviour
                 }
             }
         }
-
+        if (target == null)
+        {
+            return null;
+        }
         return target.getStats();
     }
 }
