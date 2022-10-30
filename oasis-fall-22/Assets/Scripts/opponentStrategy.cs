@@ -7,13 +7,17 @@ interface opponentStrategy{
 }
 
 class move{
-    private boolean playCard;
-    private String moveDirection;
+    private bool playCard;
+    private string moveDirection;
     private cards cardPlayed;
 
     public move(String move){
         playCard = false;
         moveDirection = move;
-        
+    }
+
+    public move(cards card){
+        playCard = true;
+        cardPlayed = card;
     }
 }
