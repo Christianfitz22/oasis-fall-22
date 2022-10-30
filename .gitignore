@@ -63,3 +63,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 *.log
+oasis-fall-22/.vs/oasis-fall-22/xs/project-cache/Assembly-CSharp-Debug.json
+oasis-fall-22/.vs/oasis-fall-22/xs/UserPrefs.xml
+oasis-fall-22/.vs/oasis-fall-22/xs/UserPrefs.xml
+oasis-fall-22/Assembly-CSharp.csproj
