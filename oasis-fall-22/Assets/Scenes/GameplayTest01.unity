@@ -2631,7 +2631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dac83f209e174c7b8d63c0f9c8d0491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnTimeMax: 1
+  turnTimeMax: 5
 --- !u!1 &982652444
 GameObject:
   m_ObjectHideFlags: 0

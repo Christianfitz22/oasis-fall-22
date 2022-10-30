@@ -59,8 +59,14 @@ public class EnemyController : MonoBehaviour
         DeathCheck();
         if (!outOfPlay)
         {
+            TakeTurn();
             UpdateBoardPosition();
         }
+    }
+
+    public void TakeTurn()
+    {
+
     }
 
     public void DeathCheck()

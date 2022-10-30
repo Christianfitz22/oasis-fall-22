@@ -59,12 +59,13 @@
     <Compile Include="Assets/Scripts/TimerController.cs" />
     <Compile Include="Assets/Scripts/PlayerTest01.cs" />
     <Compile Include="Assets/Scripts/cards.cs" />
-    <Compile Include="Assets/Scripts/playerStats.cs" />
     <Compile Include="Assets/Scripts/MoveButtonManager.cs" />
     <Compile Include="Assets/Scripts/Board.cs" />
     <Compile Include="Assets/Scripts/EnemyController.cs" />
     <Compile Include="Assets/Scripts/statAffects.cs" />
     <Compile Include="Assets/Scripts/RedoButtonController.cs" />
+    <Compile Include="Assets/Scripts/playerStats.cs" />
+    <Compile Include="Assets/Scripts/deck.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

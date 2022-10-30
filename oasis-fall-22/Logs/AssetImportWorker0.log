@@ -174,21 +174,3 @@ Received Import Request.
   path: Assets/Scenes/GameplayTest01.unity
   artifactKey: Guid(573df9d8d552c414ab9a831c6c563967) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Scenes/GameplayTest01.unity using Guid(573df9d8d552c414ab9a831c6c563967) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36c6af433b74900d7623dd8380a4b1b7') in 0.006367 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 29.046683 seconds.
-  path: Assets/Scripts
-  artifactKey: Guid(16f6d93bdf1e946ff8d5a22fa960b739) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts using Guid(16f6d93bdf1e946ff8d5a22fa960b739) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69c1eaa4af162f03da172d8de4b464cb') in 0.001452 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 5.044422 seconds.
-  path: Assets/Scripts/opponentStrategy.cs
-  artifactKey: Guid(0c8573b5190a940e28f11082717fd697) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/opponentStrategy.cs using Guid(0c8573b5190a940e28f11082717fd697) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01967f9215f92c19ee42f0cc73448b54') in 0.259208 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 18.911967 seconds.
-  path: Assets/Scripts/MoveButtonManager.cs
-  artifactKey: Guid(b43808c71eac1430481b0703ac1d0837) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/MoveButtonManager.cs using Guid(b43808c71eac1430481b0703ac1d0837) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '322b8141c04c5e64b489ceb35a7f8a9e') in 0.003488 seconds 
