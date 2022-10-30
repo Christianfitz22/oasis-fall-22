@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
 
 
     private playerStats currentStats;
+    private opponentStrategy strat;
 
     private bool outOfPlay = false;
 
@@ -30,6 +31,9 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         currentStats = new playerStats(hitpoints, attack, defense);
+
+        //replace later
+        strat = new randomMoveStrategy(this);
 
         UpdateBoardPosition();
     }
@@ -66,7 +70,21 @@ public class EnemyController : MonoBehaviour
 
     public void TakeTurn()
     {
-        
+        move toMove = strat.chooseMove();
+        string m = toMove.getMove();
+        if(m != null){  
+            if(Equals(m, "up")){
+                boardY = boardY - currentStats.getMovementSpeed();
+            } else if(Equals(m, "down")){
+                boardY = boardY + currentStats.getMovementSpeed();
+            } else if(Equals(m, "right")){
+                boardX = boardX + currentStats.getMovementSpeed();
+            } else if(Equals(m, "left")){
+                boardX = boardX - currentStats.getMovementSpeed();
+            } else if(Equals(m, "card")){
+                //add later, get target line
+            }
+        }
     }
 
     public void DeathCheck()
