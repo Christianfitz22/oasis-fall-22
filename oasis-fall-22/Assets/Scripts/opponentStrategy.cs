@@ -9,15 +9,26 @@ interface opponentStrategy{
 class move{
     private bool playCard;
     private string moveDirection;
-    private cards cardPlayed;
+    private card cardPlayed;
 
-    public move(String move){
+    public move(string move){
         playCard = false;
         moveDirection = move;
     }
 
-    public move(cards card){
+    public move(card card){
         playCard = true;
         cardPlayed = card;
+    }
+
+    public string getMove(){
+        if(moveDirection != null){
+            return moveDirection;
+        }
+        return "card";
+    }
+
+    public card getCard(){
+        return cardPlayed;
     }
 }

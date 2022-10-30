@@ -66,7 +66,7 @@ public class EnemyController : MonoBehaviour
 
     public void TakeTurn()
     {
-
+        
     }
 
     public void DeathCheck()
