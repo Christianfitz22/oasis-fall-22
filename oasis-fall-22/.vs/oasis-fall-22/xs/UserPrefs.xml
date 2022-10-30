@@ -1,15 +1,13 @@
 ﻿<Properties StartupConfiguration="{FFA0C246-99C3-F0CB-0F3D-D4AA6D005A39}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/deck.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerTest01.cs" Line="75" Column="10" />
-      <File FileName="Assets/Scripts/playerStats.cs" Line="45" Column="6" />
-      <File FileName="Assets/Scripts/Board.cs" Line="10" Column="65" />
-      <File FileName="Assets/Scripts/cards.cs" Line="87" Column="10" />
-      <File FileName="Assets/Scripts/statAffects.cs" Line="5" Column="8" />
-      <File FileName="Assets/Scripts/EnemyController.cs" Line="32" Column="68" />
-      <File FileName="Assets/Scripts/MoveButtonManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TimerController.cs" Line="46" Column="45" />
-      <File FileName="Assets/Scripts/RedoButtonController.cs" />
+      <File FileName="Assets/Scripts/MoveButtonManager.cs" Line="1" Column="1" IsPinned="True" />
+      <File FileName="Assets/Scripts/PlayerTest01.cs" Line="76" Column="44" />
+      <File FileName="Assets/Scripts/cards.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/playerStats.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TimerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/EnemyController.cs" Line="69" Column="1" />
+      <File FileName="Assets/Scripts/deck.cs" Line="21" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,7 +15,7 @@
           <Node name="oasis-fall-22" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="EnemyController.cs" selected="True" />
+                <Node name="deck.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -27,7 +25,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c21a0635-7dd3-4277-8c78-1f0bd2fc5932" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="3c6d2cec-45f0-420e-8180-8e3385206a6f" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

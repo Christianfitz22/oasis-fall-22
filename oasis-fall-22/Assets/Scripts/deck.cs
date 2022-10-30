@@ -1,23 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
 class deck{
     //the deck
-    private List<cards> deckOfCards;
+    private List<card> deckOfCards;
 
     //create the deck
     public deck(){
-        deckOfCards = new List<cards>();
+        deckOfCards = new List<card>();
         deckOfCards.Add(new card(chooseRandomColor(), true)); //an attacking card :D
         deckOfCards.Add(new card(chooseRandomColor(), true)); //an attacking card :D
         deckOfCards.Add(new card(chooseRandomColor(), true)); //an attacking card :D
         deckOfCards.Add(new card(chooseRandomColor(), false)); //a healing card :D
         deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("spd", true))); //movement buff card
-        deckOfCards.Add(new cards(chooseRandomColor(), createNewStatAffect("spd", false))); //movement debuff card
-        deckOfCards.Add(new cards(chooseRandomColor(), createNewStatAffect("atk", true))); //atk buff
-        deckOfCards.Add(new cards(chooseRandomColor(), createNewStatAffect("atk", false))); //atk debuff
-        deckOfCards.Add(new cards(chooseRandomColor(), createNewStatAffect("def", true))); //def buff
-        deckOfCards.Add(new cards(chooseRandomColor(), createNewStatAffect("def", false))); //def debuff
+        deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("spd", false))); //movement debuff card
+        deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("atk", true))); //atk buff
+        deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("atk", false))); //atk debuff
+        deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("def", true))); //def buff
+        deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("def", false))); //def debuff
     }
 
-    private statAffects createNewStatAffect(string str, boolean buff){
+    private statAffects createNewStatAffect(string str, bool buff){
         if(buff){
             return new statAffects(3, str, 2);
         }
@@ -25,7 +30,7 @@ class deck{
             return new statAffects(1, str, 0);
         }
         else{
-            return new statAffects(3, str, 0.5);
+            return new statAffects(3, str, 0.5f);
         }
     }
 
@@ -33,7 +38,7 @@ class deck{
     Choose a random color for our cards.
     */
     private string chooseRandomColor(){
-        Random rnd = new Random();
+        System.Random rnd = new System.Random();
         int random = rnd.Next(1, 5);
         if(random == 1){
             return "red";
@@ -50,13 +55,13 @@ class deck{
     }
 
     //choose five random cards
-    public List<cards> chooseCards(){
-        Random rnd = new Random();
-        List<cards> returnCards = new List<cards>();
+    public List<card> chooseCards(){
+        System.Random rnd = new System.Random();
+        List<card> returnCards = new List<card>();
         for(int i = 0; i < 5; i++){
-            int random = rnd.next(1, deckOfCards.Count);
-            returnCards.Add(deckOfCards.ElementAt(random));
-            deckOfCards.removeAt(random);
+            int random = rnd.Next(1, deckOfCards.Count);
+            returnCards.Add(deckOfCards[random]);
+            deckOfCards.RemoveAt(random);
         }
         return returnCards;
     }
