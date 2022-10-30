@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-class playerStats{
+public class playerStats{
     private int totalHP;
     private int HP;
     private int ATK;
@@ -22,6 +22,20 @@ class playerStats{
         HP = 100;
         ATK = 10;
         DEF = 10;
+        SPD = 1;
+        color = "neutral";
+        hasMoved = false;
+        isAlive = true;
+        hasDefended = false;
+        buffs = new List<statAffects>();
+    }
+
+    public playerStats (int hp, int atk, int def)
+    {
+        totalHP = hp;
+        HP = hp;
+        ATK = atk;
+        DEF = def;
         SPD = 1;
         color = "neutral";
         hasMoved = false;
@@ -156,6 +170,7 @@ class playerStats{
             this.HP = 0;
             this.isAlive = false;
         }
+        Debug.Log(HP);
     }
 
     /**

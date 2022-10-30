@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TMPro;
 
@@ -25,6 +26,8 @@ public class PlayerTest01 : MonoBehaviour
     private playerStats currentStats;
     private TMP_Text statValues;
 
+    private card attackExample;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,8 @@ public class PlayerTest01 : MonoBehaviour
         statValues = GameObject.Find("StatValues").GetComponent<TMP_Text>();
 
         UpdateBoardPosition();
+
+        attackExample = new card("red", true);
     }
 
     // Update is called once per frame
@@ -61,6 +66,14 @@ public class PlayerTest01 : MonoBehaviour
         {
             boardX++;
             UpdateBoardPosition();
+        }
+        if (Input.GetKeyDown("p"))
+        {
+            currentStats.addAffect(new statAffects(3, "atk", 2f));
+        }
+        if (Input.GetKeyDown("l"))
+        {
+            attackExample.playCard(currentStats, getTargetLine("w"));
         }
     }
 
@@ -126,5 +139,55 @@ public class PlayerTest01 : MonoBehaviour
     public bool TurnTaken()
     {
         return takenTurn;
+    }
+
+    // finds the first enemy in a given direction
+    // given a string direction "w" "a" "s" "d"
+    // if finds none, returns null
+    // otherwise, returns playerStats of the selected target
+    public playerStats getTargetLine(string dir)
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        EnemyController target = null;
+        int closestDistance = 10000;
+        foreach (GameObject enemy in enemies)
+        {
+            EnemyController enemyCon = enemy.GetComponent<EnemyController>();
+            if (enemyCon.getStats().getIsAlive())
+            {
+                int yDistance = enemyCon.getYPos() - boardY;
+                int xDistance = enemyCon.getXPos() - boardX;
+                if (dir.Equals("w"))
+                {
+                    if (yDistance < 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
+                    {
+                        target = enemyCon;
+                    }
+                }
+                else if (dir.Equals("s"))
+                {
+                    if (yDistance > 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
+                    {
+                        target = enemyCon;
+                    }
+                }
+                else if (dir.Equals("d"))
+                {
+                    if (xDistance > 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
+                    {
+                        target = enemyCon;
+                    }
+                }
+                else if (dir.Equals("a"))
+                {
+                    if (xDistance < 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
+                    {
+                        target = enemyCon;
+                    }
+                }
+            }
+        }
+
+        return target.getStats();
     }
 }

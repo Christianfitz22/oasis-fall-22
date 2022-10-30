@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-class card{
+public class card{
     
     private string color;
     private statAffects whenCardPlayed;
@@ -81,22 +81,30 @@ class card{
     /**
     Called when you want to play the card.
     */
-    public void playCard(playerStats player, playerStats target){
-        if(!isActive){
-            target.addAffect(whenCardPlayed);
-        }
-        else if(!isAttack){
-            int healed = player.getATK();
-            target.changeHealth(healed);
-        }
-        else{
-            //fix so ranged attacks work
-            int atk = player.getATK();
-            int def = target.getDEF();
-            int damage = def - atk;
-            damage = (int) (damage * this.weaponTriangle(target.getColor()));
-            if(def < atk){
-                target.changeHealth(damage);
+    public void playCard(playerStats player, playerStats target)
+    {
+        if (player != null && target != null)
+        {
+            if (!isActive)
+            {
+                target.addAffect(whenCardPlayed);
+            }
+            else if (!isAttack)
+            {
+                int healed = player.getATK();
+                target.changeHealth(healed);
+            }
+            else
+            {
+                //fix so ranged attacks work
+                int atk = player.getATK();
+                int def = target.getDEF();
+                int damage = def - atk;
+                damage = (int)(damage * this.weaponTriangle(target.getColor()));
+                if (def < atk)
+                {
+                    target.changeHealth(damage);
+                }
             }
         }
     }

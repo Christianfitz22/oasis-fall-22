@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-class statAffects{
+public class statAffects{
 
     private int turnsLeft;
     /**

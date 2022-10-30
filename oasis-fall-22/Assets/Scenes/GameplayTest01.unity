@@ -2060,7 +2060,7 @@ GameObject:
   - component: {fileID: 641196342}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2146,6 +2146,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardX: 0
   boardY: 0
+  hitpoints: 30
+  attack: 0
+  defense: 0
 --- !u!1 &739599194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2628,7 +2631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dac83f209e174c7b8d63c0f9c8d0491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnTimeMax: 5
+  turnTimeMax: 1
 --- !u!1 &982652444
 GameObject:
   m_ObjectHideFlags: 0
@@ -3277,7 +3280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c615e388e7bd4069a2eb11798010df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardX: 3
+  boardX: 0
   boardY: 3
 --- !u!1 &1352396367
 GameObject:

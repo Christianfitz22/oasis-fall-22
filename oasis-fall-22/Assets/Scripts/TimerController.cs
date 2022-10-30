@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class TimerController : MonoBehaviour
     private float currentTime;
 
     private PlayerTest01 player;
+    private EnemyController[] enemies;
     private Image timerContent;
 
     // Start is called before the first frame update
@@ -22,6 +24,9 @@ public class TimerController : MonoBehaviour
 
         player = GameObject.Find("Player").GetComponent<PlayerTest01>();
         timerContent = transform.Find("TimerContent").gameObject.GetComponent<Image>();
+
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        enemies = enemyObjects.Select(x => x.GetComponent<EnemyController>()).ToArray<EnemyController>();
     }
 
     // Update is called once per frame
@@ -34,6 +39,13 @@ public class TimerController : MonoBehaviour
             {
                 SetTimer(turnTimeMax);
                 player.ExecuteTurn();
+                foreach (EnemyController enemy in enemies)
+                {
+                    if (!enemy.IsOutOfPlay())
+                    {
+                        enemy.ExecuteTurn();
+                    }
+                }
             }
         }
     }
