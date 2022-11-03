@@ -54,11 +54,11 @@ class deck{
         }
     }
 
-    //choose five random cards
+    //choose three random cards
     public List<card> chooseCards(){
         System.Random rnd = new System.Random();
         List<card> returnCards = new List<card>();
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 3; i++){
             int random = rnd.Next(1, deckOfCards.Count);
             returnCards.Add(deckOfCards[random]);
             deckOfCards.RemoveAt(random);

@@ -28,6 +28,16 @@ public class PlayerTest01 : MonoBehaviour
 
     private card attackExample;
 
+    private deck playerDeck;
+    private GameObject cardOne;
+    private TMP_Text cardOneLabel;
+    private GameObject cardTwo;
+    private TMP_Text cardTwoLabel;
+    private GameObject cardThree;
+    private TMP_Text cardThreeLabel;
+
+    private card[] playerHand;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +51,17 @@ public class PlayerTest01 : MonoBehaviour
         UpdateBoardPosition();
 
         attackExample = new card("red", true);
+
+        playerDeck = new deck();
+
+        cardOne = GameObject.Find("CardOne");
+        cardOneLabel = cardOne.transform.Find("cardOneLabel").gameObject.GetComponent<TMP_Text>();
+        cardTwo = GameObject.Find("CardTwo");
+        cardTwoLabel = cardOne.transform.Find("cardTwoLabel").gameObject.GetComponent<TMP_Text>();
+        cardThree = GameObject.Find("CardThree");
+        cardThreeLabel = cardOne.transform.Find("cardThreeLabel").gameObject.GetComponent<TMP_Text>();
+
+        playerHand = new card[3];
     }
 
     // Update is called once per frame
@@ -83,6 +104,7 @@ public class PlayerTest01 : MonoBehaviour
         UpdateBoardPosition();
         UpdateStatValues();
         ResetTurn();
+        DrawCards();
     }
 
     public void UpdateBoardPosition()
@@ -111,6 +133,12 @@ public class PlayerTest01 : MonoBehaviour
     {
         resetButton.SetActive(true);
         takenTurn = true;
+    }
+
+    // should be called whenever we need three new cards to be drawn and displayed for the player
+    public void DrawCards()
+    {
+
     }
 
     public void MovePlayerX(int cx)
@@ -187,7 +215,10 @@ public class PlayerTest01 : MonoBehaviour
                 }
             }
         }
-
+        if (target == null)
+        {
+            return null;
+        }
         return target.getStats();
     }
 }

@@ -62,5 +62,9 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
-oasis-fall-22/Logs/AssetImportWorker0-prev.log
-oasis-fall-22/Logs/AssetImportWorker1-prev.log
+
+*.log
+oasis-fall-22/.vs/oasis-fall-22/xs/project-cache/Assembly-CSharp-Debug.json
+oasis-fall-22/.vs/oasis-fall-22/xs/UserPrefs.xml
+oasis-fall-22/.vs/oasis-fall-22/xs/UserPrefs.xml
+oasis-fall-22/Assembly-CSharp.csproj
