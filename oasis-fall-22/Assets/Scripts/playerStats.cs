@@ -12,6 +12,7 @@ public class playerStats{
     private bool hasMoved;
     private bool isAlive;
     private bool hasDefended;
+    private bool playerTeam;
     private List<statAffects> buffs;
 
     /**
@@ -28,9 +29,10 @@ public class playerStats{
         isAlive = true;
         hasDefended = false;
         buffs = new List<statAffects>();
+        playerTeam = true;
     }
 
-    public playerStats (int hp, int atk, int def)
+    public playerStats (int hp, int atk, int def, bool team)
     {
         totalHP = hp;
         HP = hp;
@@ -42,6 +44,7 @@ public class playerStats{
         isAlive = true;
         hasDefended = false;
         buffs = new List<statAffects>();
+        playerTeam = team;
     }
 
     public int getTotalHP()
@@ -85,6 +88,10 @@ public class playerStats{
 
     public bool getHasDefended(){
         return hasDefended;
+    }
+
+    public bool getTeam(){
+        return playerTeam;
     }
 
     /**
