@@ -110,6 +110,7 @@ public class EnemyController : MonoBehaviour
     */
     public playerStats getTargetLine(string dir)
     {
+        //fix for itself too ig
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         //TODO: add player to enemies[]
         //TODO: Maybe change it so enemies or allies?
