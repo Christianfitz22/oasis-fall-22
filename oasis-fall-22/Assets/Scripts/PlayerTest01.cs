@@ -50,7 +50,7 @@ public class PlayerTest01 : MonoBehaviour
         resetButton.SetActive(false);
         moveButtonManager = GameObject.Find("MovementButtons").GetComponent<MoveButtonManager>();
 
-        currentStats = new playerStats(10, 10, 0, true);
+        currentStats = new playerStats();
         statValues = GameObject.Find("StatValues").GetComponent<TMP_Text>();
 
         UpdateBoardPosition();
