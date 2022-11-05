@@ -23,6 +23,7 @@ public class MoveButtonManager : MonoBehaviour
         {
             moveButton.SetActive(false);
             directionButtons.SetActive(true);
+            player.MoveOpened();
         }
     }
 
@@ -31,7 +32,19 @@ public class MoveButtonManager : MonoBehaviour
         if (!player.TurnTaken())
         {
             directionButtons.SetActive(false);
-            moveButton.SetActive(true);
+            moveButton.SetActive(false);
         }
+    }
+
+    public void showMove()
+    {
+        moveButton.SetActive(true);
+        directionButtons.SetActive(false);
+    }
+
+    public void HideAll()
+    {
+        moveButton.SetActive(false);
+        directionButtons.SetActive(false);
     }
 }

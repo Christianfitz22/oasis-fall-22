@@ -11,17 +11,22 @@ public class card{
     //replace with an array so that you can do ranged attacks
     private bool isAttack;
 
+    private string description;
+
     /**
     Constructor for a support card.
     */
     public card(string c, statAffects s){
+
         if (c == null || s == null)
         {
             //throw new IllegalArgumentException("Cannot be null");
+            Debug.Log("c or s was null");
         }
-        else if (!(c.Equals("red") && c.Equals("blue") && c.Equals("green") && c.Equals("neutral")))
+        else if (!(c.Equals("red") || c.Equals("blue") || c.Equals("green") || c.Equals("neutral")))
         {
             // throw new IllegalArgumentException("Color must be red, blue, green, or neutral.");
+            Debug.Log("color was wrong");
         }
         else
         {
@@ -29,6 +34,8 @@ public class card{
             whenCardPlayed = s;
             isActive = false;
         }
+
+        SetDesc();
     }
     /**
     Constructor for an active card.
@@ -44,6 +51,8 @@ public class card{
             isActive = true;
             isAttack = isATK;
         }
+
+        SetDesc();
     }
 
     public string getColor(){
@@ -107,5 +116,64 @@ public class card{
                 }
             }
         }
+    }
+
+    public bool getIsActive()
+    {
+        return isActive;
+    }
+
+    public bool getIsAttack()
+    {
+        return isAttack;
+    }
+
+    public void SetDesc()
+    {
+        string desc = "";
+        if (isActive)
+        {
+            if (isAttack)
+            {
+                desc += "Attack";
+            }
+            else
+            {
+                desc += "Heal";
+            }
+        }
+        else
+        {
+            desc += "Effect";
+            float multiplyer = whenCardPlayed.GetEffectBy();
+            if (multiplyer == 2f)
+            {
+                desc += "\nBuff ";
+            }
+            else if (multiplyer == 0f || multiplyer == 0.5f)
+            {
+                desc += "\nDebuff ";
+            }
+            string statAffected = whenCardPlayed.getStatAffected();
+            if (statAffected == "spd")
+            {
+                desc += "Speed";
+            }
+            else if (statAffected == "atk")
+            {
+                desc += "Attack";
+            }
+            else if (statAffected == "def")
+            {
+                desc += "Defense";
+            }
+        }
+        desc += "\n" + color;
+        description = desc;
+    }
+
+    public string GetDesc()
+    {
+        return description;
     }
 }
