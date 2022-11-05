@@ -55,11 +55,11 @@ public class PlayerTest01 : MonoBehaviour
         playerDeck = new deck();
 
         cardOne = GameObject.Find("CardOne");
-        cardOneLabel = cardOne.transform.Find("cardOneLabel").gameObject.GetComponent<TMP_Text>();
+        cardOneLabel = cardOne.transform.Find("CardOneLabel").gameObject.GetComponent<TMP_Text>();
         cardTwo = GameObject.Find("CardTwo");
-        cardTwoLabel = cardOne.transform.Find("cardTwoLabel").gameObject.GetComponent<TMP_Text>();
+        cardTwoLabel = cardTwo.transform.Find("CardTwoLabel").gameObject.GetComponent<TMP_Text>();
         cardThree = GameObject.Find("CardThree");
-        cardThreeLabel = cardOne.transform.Find("cardThreeLabel").gameObject.GetComponent<TMP_Text>();
+        cardThreeLabel = cardThree.transform.Find("CardThreeLabel").gameObject.GetComponent<TMP_Text>();
 
         playerHand = new card[3];
     }
@@ -138,7 +138,16 @@ public class PlayerTest01 : MonoBehaviour
     // should be called whenever we need three new cards to be drawn and displayed for the player
     public void DrawCards()
     {
+        playerHand = playerDeck.chooseCards().ToArray();
+    }
 
+    public void RenderCard(GameObject cardObj, TMP_Text cardLabel, int index)
+    {
+        cardObj.SetActive(true);
+        string desc = "";
+        desc += "\nColor: " + playerHand[index];
+        cardLabel.SetText(desc);
+        
     }
 
     public void MovePlayerX(int cx)

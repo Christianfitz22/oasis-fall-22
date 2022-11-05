@@ -61,7 +61,6 @@ class deck{
         for(int i = 0; i < 3; i++){
             int random = rnd.Next(1, deckOfCards.Count);
             returnCards.Add(deckOfCards[random]);
-            deckOfCards.RemoveAt(random);
         }
         return returnCards;
     }
