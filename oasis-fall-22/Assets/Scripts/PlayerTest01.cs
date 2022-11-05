@@ -37,6 +37,11 @@ public class PlayerTest01 : MonoBehaviour
     private TMP_Text cardThreeLabel;
 
     private card[] playerHand;
+    private int selectedIndex = 0;
+
+    private playerStats queTarget = null;
+
+    private GameObject effectButtons;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +50,7 @@ public class PlayerTest01 : MonoBehaviour
         resetButton.SetActive(false);
         moveButtonManager = GameObject.Find("MovementButtons").GetComponent<MoveButtonManager>();
 
-        currentStats = new playerStats();
+        currentStats = new playerStats(10, 10, 0, true);
         statValues = GameObject.Find("StatValues").GetComponent<TMP_Text>();
 
         UpdateBoardPosition();
@@ -61,7 +66,13 @@ public class PlayerTest01 : MonoBehaviour
         cardThree = GameObject.Find("CardThree");
         cardThreeLabel = cardThree.transform.Find("CardThreeLabel").gameObject.GetComponent<TMP_Text>();
 
+        effectButtons = GameObject.Find("EffectButtons");
+
         playerHand = new card[3];
+        DrawCards();
+        RenderCards();
+        HideEffects();
+        UpdateStatValues();
     }
 
     // Update is called once per frame
@@ -96,15 +107,17 @@ public class PlayerTest01 : MonoBehaviour
         {
             attackExample.playCard(currentStats, getTargetLine("w"));
         }
+        //Debug.Log("HP: " + currentStats.getCurrentHealth());
     }
 
     // should always be called at the end of each round
     public void ExecuteTurn()
     {
+        ExecuteCard();
         UpdateBoardPosition();
         UpdateStatValues();
-        ResetTurn();
         DrawCards();
+        ResetTurn();
     }
 
     public void UpdateBoardPosition()
@@ -115,7 +128,7 @@ public class PlayerTest01 : MonoBehaviour
 
     public void UpdateStatValues()
     {
-        statValues.SetText(currentStats.getCurrentHealth() + " / 100\n" + currentStats.getATK() + "\n" + currentStats.getDEF() + "\n" + currentStats.getMovementSpeed());
+        statValues.SetText(currentStats.getCurrentHealth() + " / " + currentStats.getTotalHP() + "\n" + currentStats.getATK() + "\n" + currentStats.getDEF() + "\n" + currentStats.getMovementSpeed());
     }
 
     // should be called whenever we need to reset a player's turn before the end of the round
@@ -123,9 +136,12 @@ public class PlayerTest01 : MonoBehaviour
     {
         deltaX = 0;
         deltaY = 0;
+        queTarget = null;
         resetButton.SetActive(false);
         takenTurn = false;
-        moveButtonManager.directionPressed();
+        moveButtonManager.showMove();
+        RenderCards();
+        HideEffects();
     }
 
     // should be called whenever the player has finished setting their turn
@@ -133,6 +149,7 @@ public class PlayerTest01 : MonoBehaviour
     {
         resetButton.SetActive(true);
         takenTurn = true;
+        HideCards();
     }
 
     // should be called whenever we need three new cards to be drawn and displayed for the player
@@ -141,14 +158,72 @@ public class PlayerTest01 : MonoBehaviour
         playerHand = playerDeck.chooseCards().ToArray();
     }
 
+    // should be called whenever all three cards need to be displayed
+    public void RenderCards()
+    {
+        RenderCard(cardOne, cardOneLabel, 0);
+        RenderCard(cardTwo, cardTwoLabel, 1);
+        RenderCard(cardThree, cardThreeLabel, 2);
+    }
+
+    public void HideCards()
+    {
+        cardOne.SetActive(false);
+        cardTwo.SetActive(false);
+        cardThree.SetActive(false);
+    }
+
     public void RenderCard(GameObject cardObj, TMP_Text cardLabel, int index)
     {
         cardObj.SetActive(true);
-        string desc = "";
-        desc += "\nColor: " + playerHand[index];
-        cardLabel.SetText(desc);
-        
+        cardLabel.SetText(playerHand[index].GetDesc());
+        Debug.Log(playerHand[index]);
+        Debug.Log(playerHand[index].GetDesc());
     }
+
+    // called whenever the direction of the card to play has been decided
+    public void PlayCard(string direction)
+    {
+        if (direction == "self")
+        {
+            queTarget = currentStats;
+
+        }
+        else
+        {
+            queTarget = getTargetLine(direction);
+        }
+        HideEffects();
+        SetTurn();
+    }
+
+    public void ExecuteCard()
+    {
+        if (queTarget != null)
+        {
+            playerHand[selectedIndex].playCard(currentStats, queTarget);
+            queTarget = null;
+        }
+    }
+
+    public void SelectCard(int index)
+    {
+        selectedIndex = index;
+        HideCards();
+        ShowEffects();
+        moveButtonManager.HideAll();
+    }
+
+    public void ShowEffects()
+    {
+        effectButtons.SetActive(true);
+    }
+
+    public void HideEffects()
+    {
+        effectButtons.SetActive(false);
+    }
+
 
     public void MovePlayerX(int cx)
     {
@@ -171,6 +246,11 @@ public class PlayerTest01 : MonoBehaviour
         boardY = Mathf.Clamp(boardY + deltaY, 0, boardHeight - 1);
         deltaX = 0;
         deltaY = 0;
+    }
+
+    public void MoveOpened()
+    {
+        HideCards();
     }
 
     public bool TurnTaken()

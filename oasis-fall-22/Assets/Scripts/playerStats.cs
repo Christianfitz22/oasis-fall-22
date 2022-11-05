@@ -173,6 +173,10 @@ public class playerStats{
     */
     public void changeHealth(int change){
         this.HP = this.HP + change;
+        if (this.HP > totalHP)
+        {
+            this.HP = totalHP;
+        }
         if(this.HP <= 0){
             this.HP = 0;
             this.isAlive = false;

@@ -51,4 +51,9 @@ public class statAffects{
     public int changeStats(int originalStat){
         return (int) (originalStat * affectedBy);
     }
+
+    public float GetEffectBy()
+    {
+        return affectedBy;
+    }
 }

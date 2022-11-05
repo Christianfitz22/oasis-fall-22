@@ -59,7 +59,7 @@ class deck{
         System.Random rnd = new System.Random();
         List<card> returnCards = new List<card>();
         for(int i = 0; i < 3; i++){
-            int random = rnd.Next(1, deckOfCards.Count);
+            int random = rnd.Next(0, deckOfCards.Count);
             returnCards.Add(deckOfCards[random]);
         }
         return returnCards;
