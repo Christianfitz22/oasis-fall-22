@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
 
     private bool outOfPlay = false;
 
-    // Start is called before the first frame update
+    /* Start is called before the first frame update*/
     void Start()
     {
         currentStats = new playerStats(hitpoints, attack, defense, false); //TODO: fix for spawning
@@ -85,7 +85,7 @@ public class EnemyController : MonoBehaviour
             } else if(Equals(m, "left")){
                 boardX = boardX - currentStats.getMovementSpeed();
             } else if(Equals(m, "card")){
-                //add later, get target line
+                toMove.doMove(this.getStats());
             }
         }
     }
