@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 interface opponentStrategy{
     move chooseMove();
@@ -16,16 +17,32 @@ class randomMoveStrategy : opponentStrategy{
     public move chooseMove(){
         playerStats stats = c.getStats();
         int speed = stats.getMovementSpeed();
-        if(c.getYPos() - speed >= 0){
-            return new move("up");
-        } else if(c.getXPos() - speed >= 0){
-            return new move("left");
-        } else if (c.getYPos() + speed >= 7){
-            return new move("down");
-        } else if(c.getXPos() + speed >= 9){
-            return new move("right");
+        System.Random rnd = new System.Random();
+        int random = rnd.Next(1, 5);
+        move chosenMove = null;
+        if(random == 1){
+            if(c.getYPos() - speed >= 0){
+                chosenMove = new move("up");
+            } else {
+                chosenMove = new move("down");
+            }
+        } else if(random == 2){
+            if(c.getXPos() - speed >= 0){
+                chosenMove = new move("left");
+            }
+            chosenMove = new move("right");
+        } else if(random == 3){
+            if (c.getYPos() + speed >= 7){
+                chosenMove = new move("down");
+            }
+            chosenMove = new move("up");
+        } else{
+            if(c.getXPos() + speed >= 9){
+                chosenMove = new move("right");
+            }
+            chosenMove = new move("left");
         }
-        return null;
+        return chosenMove;
     }
 }
 
@@ -263,7 +280,71 @@ class findInjuredStrategy : opponentStrategy{
     }
 
     public move chooseMove(){
-        //TODO: fix
+        bool team = c.getStats().getTeam();
+        GameObject closest = null;
+        int xDist = 10000;
+        int yDist = 10000;
+        bool isPlayer = false;
+        foreach (GameObject piece in Board.allPieces){
+            EnemyController subConEnemy = piece.GetComponent<EnemyController>();
+            PlayerTest01 subConPlayer = piece.GetComponent<PlayerTest01>();
+            if(subConEnemy != null){
+                if(team == subConEnemy.getStats().getTeam()){
+                    int xDis = subConEnemy.getXPos() - c.getXPos();
+                    xDis = Math.Abs(xDis);
+                    int yDis = subConEnemy.getYPos() - c.getYPos();
+                    yDis = Math.Abs(yDis);
+                    if(xDist + yDist > xDis + yDis){
+                        xDist = xDis;
+                        yDist = yDis;
+                        closest = piece;
+                        isPlayer = false;
+                    }
+                }
+            } else {
+                if(team){
+                    int xDis = subConPlayer.GetXPos() - c.getXPos();
+                    xDis = Math.Abs(xDis);
+                    int yDis = subConPlayer.GetYPos() - c.getYPos();
+                    yDis = Math.Abs(yDis);
+                    if(xDist + yDist > xDis + yDis){
+                        xDist = xDis;
+                        yDist = yDis;
+                        closest = piece;
+                        isPlayer = true;
+                    }
+                }
+            }
+        }
+        if(isPlayer){
+            PlayerTest01 player = closest.GetComponent<PlayerTest01>();
+            if(xDist != 0){
+                if(player.GetXPos() > c.getXPos()){
+                    return new move("right");
+                }
+                return new move("left");
+            }
+            if(yDist != 0){
+                if(player.GetYPos() > c.getXPos()){
+                    return new move("down");
+                }
+                return new move("up");
+            }
+        } else {
+            EnemyController enemy = closest.GetComponent<EnemyController>();
+            if(xDist != 0){
+                if(enemy.getXPos() > c.getXPos()){
+                    return new move("right");
+                }
+                return new move("left");
+            }
+            if(yDist != 0){
+                if(enemy.getYPos() > c.getXPos()){
+                    return new move("down");
+                }
+                return new move("up");
+            }
+        }
         return null;
     }
 }
@@ -408,7 +489,71 @@ class findEnemyStrategy : opponentStrategy{
     }
 
     public move chooseMove(){
-        //TODO: fix
+        bool team = c.getStats().getTeam();
+        GameObject closest = null;
+        int xDist = 10000;
+        int yDist = 10000;
+        bool isPlayer = false;
+        foreach (GameObject piece in Board.allPieces){
+            EnemyController subConEnemy = piece.GetComponent<EnemyController>();
+            PlayerTest01 subConPlayer = piece.GetComponent<PlayerTest01>();
+            if(subConEnemy != null){
+                if(team != subConEnemy.getStats().getTeam()){
+                    int xDis = subConEnemy.getXPos() - c.getXPos();
+                    xDis = Math.Abs(xDis);
+                    int yDis = subConEnemy.getYPos() - c.getYPos();
+                    yDis = Math.Abs(yDis);
+                    if(xDist + yDist > xDis + yDis){
+                        xDist = xDis;
+                        yDist = yDis;
+                        closest = piece;
+                        isPlayer = false;
+                    }
+                }
+            } else {
+                if(!team){
+                    int xDis = subConPlayer.GetXPos() - c.getXPos();
+                    xDis = Math.Abs(xDis);
+                    int yDis = subConPlayer.GetYPos() - c.getYPos();
+                    yDis = Math.Abs(yDis);
+                    if(xDist + yDist > xDis + yDis){
+                        xDist = xDis;
+                        yDist = yDis;
+                        closest = piece;
+                        isPlayer = true;
+                    }
+                }
+            }
+        }
+        if(isPlayer){
+            PlayerTest01 player = closest.GetComponent<PlayerTest01>();
+            if(xDist != 0){
+                if(player.GetXPos() > c.getXPos()){
+                    return new move("right");
+                }
+                return new move("left");
+            }
+            if(yDist != 0){
+                if(player.GetYPos() > c.getXPos()){
+                    return new move("down");
+                }
+                return new move("up");
+            }
+        } else {
+            EnemyController enemy = closest.GetComponent<EnemyController>();
+            if(xDist != 0){
+                if(enemy.getXPos() > c.getXPos()){
+                    return new move("right");
+                }
+                return new move("left");
+            }
+            if(yDist != 0){
+                if(enemy.getYPos() > c.getXPos()){
+                    return new move("down");
+                }
+                return new move("up");
+            }
+        }
         return null;
     }
 }
@@ -504,7 +649,8 @@ class aggressiveStrategy : opponentStrategy{
     private opponentStrategy strat;
 
     public aggressiveStrategy(EnemyController c) {
-        strat = new combineStrategy(new attackEnemyStrategy(c), new findEnemyStrategy(c));
+        combineStrategy st = new combineStrategy(new attackEnemyStrategy(c), new findEnemyStrategy(c));
+        strat = new combineStrategy(st, new randomMoveStrategy(c));
     }
 
     public move chooseMove(){
