@@ -14,8 +14,11 @@ class deck{
         deckOfCards.Add(new card(chooseRandomColor(), true)); //an attacking card :D
         deckOfCards.Add(new card(chooseRandomColor(), true)); //an attacking card :D
         deckOfCards.Add(new card(chooseRandomColor(), false)); //a healing card :D
-        deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("spd", true))); //movement buff card
-        deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("spd", false))); //movement debuff card
+        //swapped speed buff cards for attack and healing
+        deckOfCards.Add(new card(chooseRandomColor(), true)); //an attacking card :D
+        deckOfCards.Add(new card(chooseRandomColor(), false)); //a healing card :D
+        //deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("spd", true))); //movement buff card
+        //deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("spd", false))); //movement debuff card
         deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("atk", true))); //atk buff
         deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("atk", false))); //atk debuff
         deckOfCards.Add(new card(chooseRandomColor(), createNewStatAffect("def", true))); //def buff

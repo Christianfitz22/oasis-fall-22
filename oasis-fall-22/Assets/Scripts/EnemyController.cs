@@ -38,6 +38,7 @@ public class EnemyController : MonoBehaviour
         strat = new randomMoveStrategy(this);
 
         UpdateBoardPosition();
+        Board.AddPiece(gameObject);
     }
 
     public void UpdateBoardPosition()
@@ -110,49 +111,99 @@ public class EnemyController : MonoBehaviour
     */
     public playerStats getTargetLine(string dir)
     {
-        //fix for itself too ig
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         //TODO: add player to enemies[]
-        EnemyController target = null;
+        //TODO: Maybe change it so enemies or allies?
+        Component target = null;
         int closestDistance = 10000;
-        foreach (GameObject enemy in enemies)
+        foreach (GameObject enemy in Board.allPieces)
         {
-            EnemyController enemyCon = enemy.GetComponent<EnemyController>();
-            if (enemyCon.getStats().getIsAlive())
+            EnemyController subConEnemy = enemy.GetComponent<EnemyController>();
+            PlayerTest01 subConPlayer = enemy.GetComponent<PlayerTest01>();
+
+            if (subConEnemy != null)
             {
-                int yDistance = enemyCon.getYPos() - boardY;
-                int xDistance = enemyCon.getXPos() - boardX;
-                if (dir.Equals("up"))
+                if (subConEnemy.getStats().getIsAlive())
                 {
-                    if (yDistance < 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
+                    int yDistance = subConEnemy.getYPos() - boardY;
+                    int xDistance = subConEnemy.getXPos() - boardX;
+                    if (dir.Equals("up"))
                     {
-                        target = enemyCon;
+                        if (yDistance < 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
+                        {
+                            target = subConEnemy;
+                        }
+                    }
+                    else if (dir.Equals("down"))
+                    {
+                        if (yDistance > 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
+                        {
+                            target = subConEnemy;
+                        }
+                    }
+                    else if (dir.Equals("right"))
+                    {
+                        if (xDistance > 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
+                        {
+                            target = subConEnemy;
+                        }
+                    }
+                    else if (dir.Equals("left"))
+                    {
+                        if (xDistance < 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
+                        {
+                            target = subConEnemy;
+                        }
                     }
                 }
-                else if (dir.Equals("down"))
+            }
+            else if (subConPlayer != null)
+            {
+                if (subConPlayer.GetStats().getIsAlive())
                 {
-                    if (yDistance > 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
+                    int yDistance = subConPlayer.GetYPos() - boardY;
+                    int xDistance = subConPlayer.GetXPos() - boardX;
+                    if (dir.Equals("up"))
                     {
-                        target = enemyCon;
+                        if (yDistance < 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
+                        {
+                            target = subConPlayer;
+                        }
                     }
-                }
-                else if (dir.Equals("right"))
-                {
-                    if (xDistance > 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
+                    else if (dir.Equals("down"))
                     {
-                        target = enemyCon;
+                        if (yDistance > 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
+                        {
+                            target = subConPlayer;
+                        }
                     }
-                }
-                else if (dir.Equals("left"))
-                {
-                    if (xDistance < 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
+                    else if (dir.Equals("right"))
                     {
-                        target = enemyCon;
+                        if (xDistance > 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
+                        {
+                            target = subConPlayer;
+                        }
+                    }
+                    else if (dir.Equals("left"))
+                    {
+                        if (xDistance < 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
+                        {
+                            target = subConPlayer;
+                        }
                     }
                 }
             }
         }
 
-        return target.getStats();
+        EnemyController sConEnemy = target.GetComponent<EnemyController>();
+        PlayerTest01 sConPlayer = target.GetComponent<PlayerTest01>();
+
+        if (sConEnemy != null)
+        {
+            return sConEnemy.getStats();
+        }
+        else
+        {
+            return sConPlayer.GetStats();
+        }
     }
 }

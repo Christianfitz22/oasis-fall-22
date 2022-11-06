@@ -50,7 +50,7 @@ public class PlayerTest01 : MonoBehaviour
         resetButton.SetActive(false);
         moveButtonManager = GameObject.Find("MovementButtons").GetComponent<MoveButtonManager>();
 
-        currentStats = new playerStats(10, 10, 0, true);
+        currentStats = new playerStats();
         statValues = GameObject.Find("StatValues").GetComponent<TMP_Text>();
 
         UpdateBoardPosition();
@@ -73,6 +73,8 @@ public class PlayerTest01 : MonoBehaviour
         RenderCards();
         HideEffects();
         UpdateStatValues();
+
+        Board.AddPiece(gameObject);
     }
 
     // Update is called once per frame
@@ -118,6 +120,7 @@ public class PlayerTest01 : MonoBehaviour
         UpdateStatValues();
         DrawCards();
         ResetTurn();
+        currentStats.TickStatus();
     }
 
     public void UpdateBoardPosition()
@@ -242,8 +245,11 @@ public class PlayerTest01 : MonoBehaviour
     // called to actually move the player on the board
     public void MovePlayer()
     {
-        boardX = Mathf.Clamp(boardX + deltaX, 0, boardWidth - 1);
-        boardY = Mathf.Clamp(boardY + deltaY, 0, boardHeight - 1);
+        if (!Board.SpaceOccupied(boardX + deltaX, boardY + deltaY))
+        {
+            boardX = Mathf.Clamp(boardX + deltaX, 0, boardWidth - 1);
+            boardY = Mathf.Clamp(boardY + deltaY, 0, boardHeight - 1);
+        }
         deltaX = 0;
         deltaY = 0;
     }
@@ -309,5 +315,20 @@ public class PlayerTest01 : MonoBehaviour
             return null;
         }
         return target.getStats();
+    }
+
+    public playerStats GetStats()
+    {
+        return currentStats;
+    }
+
+    public int GetYPos()
+    {
+        return boardY;
+    }
+
+    public int GetXPos()
+    {
+        return boardX;
     }
 }
