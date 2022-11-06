@@ -36,6 +36,7 @@ public class EnemyController : MonoBehaviour
 
         //TODO: replace later
         strat = new randomMoveStrategy(this);
+        //strat = new aggressiveStrategy(this);
 
         UpdateBoardPosition();
         Board.AddPiece(gameObject);
