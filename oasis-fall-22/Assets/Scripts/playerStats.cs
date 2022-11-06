@@ -78,6 +78,18 @@ public class playerStats{
         return x;
     }
 
+    public void TickStatus()
+    {
+        foreach (statAffects s in buffs)
+        {
+            s.turnPass();
+            if (s.noMoreTurns())
+            {
+                buffs.Remove(s);
+            }
+        }
+    }
+
     public string getColor(){
         return color;
     }

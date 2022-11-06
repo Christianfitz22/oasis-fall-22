@@ -14,12 +14,15 @@ public class statAffects{
     public statAffects(int t, string s, float num){
         if(t < 0){
             //throw new IllegalArgumentException("what the fuck");
+            Debug.Log("turn time less than 0");
         }
         else if(t == null || s == null){
             //throw new IllegalArgumentException("cannot be null");
+            Debug.Log("time or string name was null");
         }
-        else if (num <= 0){
+        else if (num < 0){
             //throw new IllegalArgumentException("Cannot be nonpositive");
+            Debug.Log("modifier cannot be negative");
         }
         else
         {
