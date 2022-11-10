@@ -15,12 +15,14 @@ public class Board : MonoBehaviour
     {
         foreach (GameObject piece in allPieces)
         {
+            Debug.Log(piece);
             float sx = piece.transform.position.x;
             float sy = piece.transform.position.y;
-            sx = (sx - boardStart.x) / cellSize;
-            sy = (sy - boardStart.y) / cellSize;
+            float bsx = (sx - boardStart.x) / cellSize;
+            float bsy = (boardStart.y - sy) / cellSize;
             // boardX * cellSize + boardStart.x
-            if (sx == tx && sy == ty)
+            Debug.Log("Piece coordinates: " + bsx + " " + bsy + "\nTarget coordinate: " + tx + " " + ty);
+            if (Mathf.Approximately(bsx, tx) && Mathf.Approximately(bsy, ty))
             {
                 return true;
             }

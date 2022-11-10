@@ -76,17 +76,39 @@ public class EnemyController : MonoBehaviour
     {
         move toMove = strat.chooseMove();
         string m = toMove.getMove();
-        if(m != null){  
-            if(Equals(m, "up")){
-                boardY = boardY - currentStats.getMovementSpeed();
-            } else if(Equals(m, "down")){
-                boardY = boardY + currentStats.getMovementSpeed();
-            } else if(Equals(m, "right")){
-                boardX = boardX + currentStats.getMovementSpeed();
-            } else if(Equals(m, "left")){
-                boardX = boardX - currentStats.getMovementSpeed();
-            } else if(Equals(m, "card")){
+        Debug.Log(m);
+        if(m != null){
+            if (Equals(m, "card"))
+            {
                 toMove.doMove(this.getStats());
+            }
+            else
+            {
+                int deltaX = 0;
+                int deltaY = 0;
+                if (Equals(m, "up"))
+                {
+                    deltaY = -currentStats.getMovementSpeed();
+                }
+                else if (Equals(m, "down"))
+                {
+                    deltaY = currentStats.getMovementSpeed();
+                }
+                else if (Equals(m, "right"))
+                {
+                    deltaX = currentStats.getMovementSpeed();
+                }
+                else if (Equals(m, "left"))
+                {
+                    deltaX = -currentStats.getMovementSpeed();
+                }
+                Debug.Log((boardX + deltaX) + " " + (boardY + deltaY));
+                if (!Board.SpaceOccupied(boardX + deltaX, boardY + deltaY))
+                {
+                    boardX += deltaX;
+                    boardY += deltaY;
+                }
+
             }
         }
     }

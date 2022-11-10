@@ -14,14 +14,16 @@ class randomMoveStrategy : opponentStrategy{
         c = controller;
     }
 
-    public move chooseMove(){
+    public move chooseMove() {
         playerStats stats = c.getStats();
         int speed = stats.getMovementSpeed();
         System.Random rnd = new System.Random();
         int random = rnd.Next(1, 5);
         move chosenMove = null;
+        Debug.Log(c.getXPos() + ", " + c.getYPos() + " " + speed);
         if(random == 1){
             if(c.getYPos() - speed >= 0){
+                Debug.Log(c.getYPos() - speed);
                 chosenMove = new move("up");
             } else {
                 chosenMove = new move("down");
@@ -30,17 +32,27 @@ class randomMoveStrategy : opponentStrategy{
             if(c.getXPos() - speed >= 0){
                 chosenMove = new move("left");
             }
-            chosenMove = new move("right");
-        } else if(random == 3){
-            if (c.getYPos() + speed >= 7){
-                chosenMove = new move("down");
-            }
-            chosenMove = new move("up");
-        } else{
-            if(c.getXPos() + speed >= 9){
+            else
+            {
                 chosenMove = new move("right");
             }
-            chosenMove = new move("left");
+        } else if(random == 3){
+            if (c.getYPos() + speed < Board.boardHeight){
+                chosenMove = new move("down");
+            }
+            else
+            {
+                chosenMove = new move("up");
+            }
+        } else{
+            if (c.getXPos() + speed < Board.boardWidth)
+            {
+                chosenMove = new move("right");
+            }
+            else
+            {
+                chosenMove = new move("left");
+            }
         }
         return chosenMove;
     }
