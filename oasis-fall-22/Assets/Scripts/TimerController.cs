@@ -46,6 +46,7 @@ public class TimerController : MonoBehaviour
                         enemy.ExecuteTurn();
                     }
                 }
+                player.EndResolution();
             }
         }
     }

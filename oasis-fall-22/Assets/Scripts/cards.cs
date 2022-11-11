@@ -100,7 +100,8 @@ public class card{
             }
             else if (!isAttack)
             {
-                int healed = player.getATK();
+                //int healed = player.getATK();
+                int healed = 50;
                 target.changeHealth(healed);
             }
             else

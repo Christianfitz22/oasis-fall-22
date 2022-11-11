@@ -15,16 +15,20 @@ public class Board : MonoBehaviour
     {
         foreach (GameObject piece in allPieces)
         {
-            Debug.Log(piece);
-            float sx = piece.transform.position.x;
-            float sy = piece.transform.position.y;
-            float bsx = (sx - boardStart.x) / cellSize;
-            float bsy = (boardStart.y - sy) / cellSize;
-            // boardX * cellSize + boardStart.x
-            Debug.Log("Piece coordinates: " + bsx + " " + bsy + "\nTarget coordinate: " + tx + " " + ty);
-            if (Mathf.Approximately(bsx, tx) && Mathf.Approximately(bsy, ty))
+            EnemyController potCon = piece.GetComponent<EnemyController>();
+            PlayerTest01 potPlayer = piece.GetComponent<PlayerTest01>();
+
+            if ((potPlayer != null) || ((potCon != null) && potCon.getStats().getIsAlive()))
             {
-                return true;
+                float sx = piece.transform.position.x;
+                float sy = piece.transform.position.y;
+                float bsx = (sx - boardStart.x) / cellSize;
+                float bsy = (boardStart.y - sy) / cellSize;
+                // boardX * cellSize + boardStart.x
+                if (Mathf.Approximately(bsx, tx) && Mathf.Approximately(bsy, ty))
+                {
+                    return true;
+                }
             }
         }
         return false;

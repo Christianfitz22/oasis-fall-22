@@ -19,10 +19,10 @@ public class playerStats{
     The constructor for a player's stats.
     */
     public playerStats() {
-        totalHP = 100;
-        HP = 100;
-        ATK = 10;
-        DEF = 10;
+        totalHP = 300;
+        HP = 300;
+        ATK = 16;
+        DEF = 4;
         SPD = 1;
         color = "neutral";
         hasMoved = false;
@@ -80,12 +80,14 @@ public class playerStats{
 
     public void TickStatus()
     {
-        foreach (statAffects s in buffs)
+        for (int i = 0; i < buffs.Count; i++)
         {
+            statAffects s = buffs[i];
             s.turnPass();
             if (s.noMoreTurns())
             {
                 buffs.Remove(s);
+                i--;
             }
         }
     }

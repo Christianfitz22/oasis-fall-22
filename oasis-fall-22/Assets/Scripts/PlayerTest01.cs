@@ -123,6 +123,12 @@ public class PlayerTest01 : MonoBehaviour
         currentStats.TickStatus();
     }
 
+    // called whenever all other actions taken by pieces on the board are finished resolving
+    public void EndResolution()
+    {
+        UpdateStatValues();
+    }
+
     public void UpdateBoardPosition()
     {
         MovePlayer();
@@ -275,6 +281,7 @@ public class PlayerTest01 : MonoBehaviour
         int closestDistance = 10000;
         foreach (GameObject enemy in enemies)
         {
+            Debug.Log(enemy);
             EnemyController enemyCon = enemy.GetComponent<EnemyController>();
             if (enemyCon.getStats().getIsAlive())
             {
@@ -285,6 +292,7 @@ public class PlayerTest01 : MonoBehaviour
                     if (yDistance < 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
                     {
                         target = enemyCon;
+                        closestDistance = Math.Abs(yDistance);
                     }
                 }
                 else if (dir.Equals("s"))
@@ -292,6 +300,7 @@ public class PlayerTest01 : MonoBehaviour
                     if (yDistance > 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
                     {
                         target = enemyCon;
+                        closestDistance = Math.Abs(yDistance);
                     }
                 }
                 else if (dir.Equals("d"))
@@ -299,6 +308,7 @@ public class PlayerTest01 : MonoBehaviour
                     if (xDistance > 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
                     {
                         target = enemyCon;
+                        closestDistance = Math.Abs(xDistance);
                     }
                 }
                 else if (dir.Equals("a"))
@@ -306,6 +316,7 @@ public class PlayerTest01 : MonoBehaviour
                     if (xDistance < 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
                     {
                         target = enemyCon;
+                        closestDistance = Math.Abs(xDistance);
                     }
                 }
             }
@@ -314,6 +325,7 @@ public class PlayerTest01 : MonoBehaviour
         {
             return null;
         }
+        Debug.Log("selected: " + target.gameObject);
         return target.getStats();
     }
 

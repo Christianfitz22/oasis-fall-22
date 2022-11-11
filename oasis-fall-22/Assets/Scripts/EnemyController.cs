@@ -29,14 +29,37 @@ public class EnemyController : MonoBehaviour
 
     private bool outOfPlay = false;
 
+    [SerializeField]
+    private string strategyToUse = "";
+
+    private bool hoveredOver = false;
+
     /* Start is called before the first frame update*/
     void Start()
     {
         currentStats = new playerStats(hitpoints, attack, defense, false); //TODO: fix for spawning
 
         //TODO: replace later
-        strat = new randomMoveStrategy(this);
+        //strat = new randomMoveStrategy(this);
         //strat = new aggressiveStrategy(this);
+        //strat = new
+
+        if (strategyToUse.Equals("attacker"))
+        {
+            strat = new aggressiveStrategy(this);
+        }
+        else if (strategyToUse.Equals("healer"))
+        {
+            strat = new healerStrategy(this);
+        }
+        else if (strategyToUse.Equals("supporter"))
+        {
+            strat = new supportStrategy(this);
+        }
+        else
+        {
+            strat = new randomMoveStrategy(this);
+        }
 
         UpdateBoardPosition();
         Board.AddPiece(gameObject);
@@ -69,6 +92,10 @@ public class EnemyController : MonoBehaviour
         {
             TakeTurn();
             UpdateBoardPosition();
+            if (hoveredOver)
+            {
+                OnMouseEnter();
+            }
         }
     }
 
@@ -154,6 +181,7 @@ public class EnemyController : MonoBehaviour
                         if (yDistance < 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
                         {
                             target = subConEnemy;
+                            closestDistance = Math.Abs(yDistance);
                         }
                     }
                     else if (dir.Equals("down"))
@@ -161,6 +189,7 @@ public class EnemyController : MonoBehaviour
                         if (yDistance > 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
                         {
                             target = subConEnemy;
+                            closestDistance = Math.Abs(yDistance);
                         }
                     }
                     else if (dir.Equals("right"))
@@ -168,6 +197,7 @@ public class EnemyController : MonoBehaviour
                         if (xDistance > 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
                         {
                             target = subConEnemy;
+                            closestDistance = Math.Abs(xDistance);
                         }
                     }
                     else if (dir.Equals("left"))
@@ -175,6 +205,7 @@ public class EnemyController : MonoBehaviour
                         if (xDistance < 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
                         {
                             target = subConEnemy;
+                            closestDistance = Math.Abs(xDistance);
                         }
                     }
                 }
@@ -190,6 +221,7 @@ public class EnemyController : MonoBehaviour
                         if (yDistance < 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
                         {
                             target = subConPlayer;
+                            closestDistance = Math.Abs(yDistance);
                         }
                     }
                     else if (dir.Equals("down"))
@@ -197,6 +229,7 @@ public class EnemyController : MonoBehaviour
                         if (yDistance > 0 && xDistance == 0 && Math.Abs(yDistance) < closestDistance)
                         {
                             target = subConPlayer;
+                            closestDistance = Math.Abs(yDistance);
                         }
                     }
                     else if (dir.Equals("right"))
@@ -204,6 +237,7 @@ public class EnemyController : MonoBehaviour
                         if (xDistance > 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
                         {
                             target = subConPlayer;
+                            closestDistance = Math.Abs(xDistance);
                         }
                     }
                     else if (dir.Equals("left"))
@@ -211,10 +245,16 @@ public class EnemyController : MonoBehaviour
                         if (xDistance < 0 && yDistance == 0 && Math.Abs(xDistance) < closestDistance)
                         {
                             target = subConPlayer;
+                            closestDistance = Math.Abs(xDistance);
                         }
                     }
                 }
             }
+        }
+
+        if (target == null)
+        {
+            return null;
         }
 
         EnemyController sConEnemy = target.GetComponent<EnemyController>();
@@ -228,5 +268,20 @@ public class EnemyController : MonoBehaviour
         {
             return sConPlayer.GetStats();
         }
+    }
+
+    void OnMouseEnter()
+    {
+        if (currentStats.getIsAlive())
+        {
+            EnemyStatDisplay.Display(currentStats.getCurrentHealth() + " / " + currentStats.getTotalHP() + "\n" + currentStats.getATK() + "\n" + currentStats.getDEF() + "\n" + currentStats.getMovementSpeed());
+            hoveredOver = true;
+        }
+    }
+
+    void OnMouseExit()
+    {
+        EnemyStatDisplay.HideDisplay();
+        hoveredOver = false;
     }
 }

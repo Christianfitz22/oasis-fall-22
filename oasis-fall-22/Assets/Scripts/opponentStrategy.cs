@@ -172,7 +172,7 @@ class injuredFleeStrategy : opponentStrategy{
         if(target != null && target.getTeam() != c.getStats().getTeam()){
             if(c.getXPos() - speed >= 0){
                 return new move("left");
-            } else if(c.getXPos() + speed >= 9){
+            } else if(c.getXPos() + speed < Board.boardWidth){
                 return new move("right");
             }
         }
@@ -180,7 +180,7 @@ class injuredFleeStrategy : opponentStrategy{
         if(target != null && target.getTeam() != c.getStats().getTeam()){
             if(c.getXPos() - speed >= 0){
                 return new move("left");
-            } else if(c.getXPos() + speed >= 9){
+            } else if(c.getXPos() + speed < Board.boardWidth){
                 return new move("right");
             }
         }
@@ -188,7 +188,7 @@ class injuredFleeStrategy : opponentStrategy{
         if(target != null && target.getTeam() != c.getStats().getTeam()){
             if(c.getYPos() - speed >= 0){
                 return new move("up");
-            } else if (c.getYPos() + speed >= 7){
+            } else if (c.getYPos() + speed < Board.boardHeight){
                 return new move("down");
             }
         }
@@ -196,7 +196,7 @@ class injuredFleeStrategy : opponentStrategy{
         if(target != null && target.getTeam() != c.getStats().getTeam()){
             if(c.getYPos() - speed >= 0){
                 return new move("up");
-            } else if (c.getYPos() + speed >= 7){
+            } else if (c.getYPos() + speed < Board.boardHeight){
                 return new move("down");
             }
         }
@@ -337,7 +337,7 @@ class findInjuredStrategy : opponentStrategy{
                 return new move("left");
             }
             if(yDist != 0){
-                if(player.GetYPos() > c.getXPos()){
+                if(player.GetYPos() > c.getYPos()){
                     return new move("down");
                 }
                 return new move("up");
@@ -351,7 +351,7 @@ class findInjuredStrategy : opponentStrategy{
                 return new move("left");
             }
             if(yDist != 0){
-                if(enemy.getYPos() > c.getXPos()){
+                if(enemy.getYPos() > c.getYPos()){
                     return new move("down");
                 }
                 return new move("up");
@@ -461,7 +461,7 @@ class escapeEnemyStrategy : opponentStrategy{
         if(target != null && target.getTeam() != c.getStats().getTeam()){
             if(c.getXPos() - speed >= 0){
                 return new move("left");
-            } else if(c.getXPos() + speed >= 9){
+            } else if(c.getXPos() + speed < Board.boardWidth){
                 return new move("right");
             }
         }
@@ -469,7 +469,7 @@ class escapeEnemyStrategy : opponentStrategy{
         if(target != null && target.getTeam() != c.getStats().getTeam()){
             if(c.getXPos() - speed >= 0){
                 return new move("left");
-            } else if(c.getXPos() + speed >= 9){
+            } else if(c.getXPos() + speed < Board.boardWidth){
                 return new move("right");
             }
         }
@@ -477,7 +477,7 @@ class escapeEnemyStrategy : opponentStrategy{
         if(target != null && target.getTeam() != c.getStats().getTeam()){
             if(c.getYPos() - speed >= 0){
                 return new move("up");
-            } else if (c.getYPos() + speed >= 7){
+            } else if (c.getYPos() + speed < Board.boardHeight){
                 return new move("down");
             }
         }
@@ -485,7 +485,7 @@ class escapeEnemyStrategy : opponentStrategy{
         if(target != null && target.getTeam() != c.getStats().getTeam()){
             if(c.getYPos() - speed >= 0){
                 return new move("up");
-            } else if (c.getYPos() + speed >= 7){
+            } else if (c.getYPos() + speed < Board.boardHeight){
                 return new move("down");
             }
         }
@@ -508,6 +508,7 @@ class findEnemyStrategy : opponentStrategy{
         bool isPlayer = false;
         foreach (GameObject piece in Board.allPieces){
             EnemyController subConEnemy = piece.GetComponent<EnemyController>();
+            //EnemyController subConEnemy = null;
             PlayerTest01 subConPlayer = piece.GetComponent<PlayerTest01>();
             if(subConEnemy != null){
                 if(team != subConEnemy.getStats().getTeam()){
@@ -546,9 +547,10 @@ class findEnemyStrategy : opponentStrategy{
                 return new move("left");
             }
             if(yDist != 0){
-                if(player.GetYPos() > c.getXPos()){
+                if(player.GetYPos() > c.getYPos()){
                     return new move("down");
                 }
+                Debug.Log("player's up");
                 return new move("up");
             }
         } else {
@@ -560,9 +562,10 @@ class findEnemyStrategy : opponentStrategy{
                 return new move("left");
             }
             if(yDist != 0){
-                if(enemy.getYPos() > c.getXPos()){
+                if(enemy.getYPos() > c.getYPos()){
                     return new move("down");
                 }
+                Debug.Log("enemy's up");
                 return new move("up");
             }
         }
@@ -580,7 +583,7 @@ class debuffEnemyStrategy : opponentStrategy{
     public move chooseMove(){
         playerStats target = c.getTargetLine("up");
         System.Random rnd = new System.Random();
-        int random = rnd.Next(1,4);
+        int random = rnd.Next(1,3);
         statAffects st;
         if(random == 1){
             st = new statAffects(3, "atk", (float) 0.5);
