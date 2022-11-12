@@ -63,7 +63,7 @@ class deck{
         List<card> returnCards = new List<card>();
         for(int i = 0; i < 3; i++){
             int random = rnd.Next(0, deckOfCards.Count);
-            returnCards.Add(deckOfCards[random]);
+            returnCards.Add(deckOfCards[random].DeepCopy());
         }
         return returnCards;
     }

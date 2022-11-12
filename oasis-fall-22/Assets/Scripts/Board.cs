@@ -11,6 +11,12 @@ public class Board : MonoBehaviour
 
     public static List<GameObject> allPieces = new List<GameObject>();
 
+    void Start()
+    {
+        //allPieces = new List<GameObject>();
+        //Debug.Log("all pieces cleared");
+    }
+
     public static bool SpaceOccupied(float tx, float ty)
     {
         foreach (GameObject piece in allPieces)
@@ -37,5 +43,47 @@ public class Board : MonoBehaviour
     public static void AddPiece(GameObject piece)
     {
         allPieces.Add(piece);
+        Debug.Log("piece added");
+    }
+
+    public static void ClearBoard()
+    {
+        allPieces = new List<GameObject>();
+        Debug.Log("board cleared");
+    }
+
+    public static bool OnlyPlayer()
+    {
+        int alive = 0;
+        bool playerAlive = false;
+
+        foreach (GameObject piece in allPieces)
+        {
+            EnemyController potCon = piece.GetComponent<EnemyController>();
+            PlayerTest01 potPlayer = piece.GetComponent<PlayerTest01>();
+
+            playerStats stats = null;
+
+            if (potCon != null)
+            {
+                stats = potCon.getStats();
+            }
+            else
+            {
+                stats = potPlayer.GetStats();
+                playerAlive = true;
+            }
+
+            if (stats != null && stats.getIsAlive())
+            {
+                alive++;
+            }
+        }
+
+        if (alive == 1 && playerAlive)
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -24,7 +24,7 @@ public class PlayerTest01 : MonoBehaviour
     private GameObject resetButton;
     private MoveButtonManager moveButtonManager;
     private playerStats currentStats;
-    private TMP_Text statValues;
+    public TMP_Text statValues;
 
     private card attackExample;
 
@@ -51,7 +51,7 @@ public class PlayerTest01 : MonoBehaviour
         moveButtonManager = GameObject.Find("MovementButtons").GetComponent<MoveButtonManager>();
 
         currentStats = new playerStats();
-        statValues = GameObject.Find("StatValues").GetComponent<TMP_Text>();
+        //statValues = GameObject.Find("StatValues").GetComponent<TMP_Text>();
 
         UpdateBoardPosition();
 
@@ -121,12 +121,18 @@ public class PlayerTest01 : MonoBehaviour
         DrawCards();
         ResetTurn();
         currentStats.TickStatus();
+
+        //Debug.Log(currentStats.GetBuffs());
     }
 
     // called whenever all other actions taken by pieces on the board are finished resolving
     public void EndResolution()
     {
         UpdateStatValues();
+        if (!currentStats.getIsAlive())
+        {
+            MainMenuController.EndGameLose();
+        }
     }
 
     public void UpdateBoardPosition()
@@ -186,8 +192,8 @@ public class PlayerTest01 : MonoBehaviour
     {
         cardObj.SetActive(true);
         cardLabel.SetText(playerHand[index].GetDesc());
-        Debug.Log(playerHand[index]);
-        Debug.Log(playerHand[index].GetDesc());
+        //Debug.Log(playerHand[index]);
+        //Debug.Log(playerHand[index].GetDesc());
     }
 
     // called whenever the direction of the card to play has been decided
@@ -281,7 +287,7 @@ public class PlayerTest01 : MonoBehaviour
         int closestDistance = 10000;
         foreach (GameObject enemy in enemies)
         {
-            Debug.Log(enemy);
+            //Debug.Log(enemy);
             EnemyController enemyCon = enemy.GetComponent<EnemyController>();
             if (enemyCon.getStats().getIsAlive())
             {
@@ -325,7 +331,7 @@ public class PlayerTest01 : MonoBehaviour
         {
             return null;
         }
-        Debug.Log("selected: " + target.gameObject);
+        //Debug.Log("selected: " + target.gameObject);
         return target.getStats();
     }
 

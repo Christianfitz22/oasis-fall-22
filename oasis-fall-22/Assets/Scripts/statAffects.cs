@@ -37,7 +37,7 @@ public class statAffects{
     }
 
     public bool noMoreTurns(){
-        if(turnsLeft <= 0){
+        if(turnsLeft < 0){
             return true;
         }
         return false;
@@ -58,5 +58,15 @@ public class statAffects{
     public float GetEffectBy()
     {
         return affectedBy;
+    }
+
+    public string GetString()
+    {
+        return getTurn() + getStatAffected() + GetEffectBy() + "\n";
+    }
+
+    public statAffects DeepCopy()
+    {
+        return new statAffects(turnsLeft, statAffected, affectedBy);
     }
 }

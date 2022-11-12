@@ -209,4 +209,14 @@ public class playerStats{
         this.hasDefended = false;
         this.buffs.Clear();
     }
+
+    public string GetBuffs()
+    {
+        string r = "";
+        foreach (statAffects s in buffs)
+        {
+            r += s.GetString();
+        }
+        return r;
+    }
 }

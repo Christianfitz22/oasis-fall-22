@@ -46,6 +46,11 @@ public class TimerController : MonoBehaviour
                         enemy.ExecuteTurn();
                     }
                 }
+
+                if (Board.OnlyPlayer())
+                {
+                    MainMenuController.EndGameWin();
+                }
                 player.EndResolution();
             }
         }

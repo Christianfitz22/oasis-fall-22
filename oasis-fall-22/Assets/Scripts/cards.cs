@@ -96,6 +96,7 @@ public class card{
         {
             if (!isActive)
             {
+                Debug.Log(whenCardPlayed.GetString());
                 target.addAffect(whenCardPlayed);
             }
             else if (!isAttack)
@@ -176,5 +177,23 @@ public class card{
     public string GetDesc()
     {
         return description;
+    }
+
+    public card DeepCopy()
+    {
+        card target = null;
+        if (!isActive)
+        {
+            target = new card(color, whenCardPlayed.DeepCopy());
+        }
+        else if (!isAttack)
+        {
+            target = new card(color, false);
+        }
+        else
+        {
+            target = new card(color, true);
+        }
+        return target;
     }
 }
